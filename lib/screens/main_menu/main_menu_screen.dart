@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_app/main.dart';
-import 'package:mobile_app/screens/save_signature_screen.dart';
+import 'package:mobile_app/screens/save_signature/save_signature_screen.dart';
 import 'package:mobile_app/utils/configs.dart';
 import 'package:nb_utils/nb_utils.dart';
 

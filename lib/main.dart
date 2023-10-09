@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_app/locale/language_en.dart';
 import 'package:mobile_app/locale/languages.dart';
-import 'package:mobile_app/screens/sign_in_screen.dart';
+import 'package:mobile_app/screens/sign_in_and_sign_up/sign_in_screen.dart';
 import 'package:mobile_app/utils/configs.dart';
 import 'package:nb_utils/nb_utils.dart';
 
