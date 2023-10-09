@@ -38,4 +38,12 @@ abstract class BaseLanguage {
   String get otpLabel;
 
   String get passwordsDoNotMatch;
+
+  String get uploadReceipt;
+
+  String get camera;
+
+  String get gallery;
+
+  String get myReceipts;
 }

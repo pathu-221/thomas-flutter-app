@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_app/main.dart';
-import 'package:mobile_app/screens/save_signature/save_signature_screen.dart';
+import 'package:mobile_app/screens/main_menu/my_receips/my_receipts_screen.dart';
+import 'package:mobile_app/screens/main_menu/save_signature/save_signature_screen.dart';
+import 'package:mobile_app/screens/main_menu/upload_receipt/upload_receipt_screen.dart';
 import 'package:mobile_app/utils/configs.dart';
 import 'package:nb_utils/nb_utils.dart';
 
@@ -19,7 +21,12 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
     'Contact'
   ];
 
-  final screens = [null, const SaveSignatureScreen(), null, null];
+  final screens = [
+    const UploadReceiptScreen(),
+    const SaveSignatureScreen(),
+    const MyReceiptsScreen(),
+    null
+  ];
 
   @override
   Widget build(BuildContext context) {

@@ -109,7 +109,6 @@ class _SignInScreenState extends State<SignInScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print('card color ${context.cardColor}');
     return Scaffold(
       appBar: AppBar(
         elevation: 0,

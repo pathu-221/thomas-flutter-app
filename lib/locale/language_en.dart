@@ -60,4 +60,16 @@ class LanguageEn extends BaseLanguage {
 
   @override
   String get passwordsDoNotMatch => "Passwords do not match!";
+
+  @override
+  String get uploadReceipt => "Upload receipt";
+
+  @override
+  String get camera => "Camera";
+
+  @override
+  String get gallery => "Gallery";
+
+  @override
+  String get myReceipts => "My receipts";
 }
