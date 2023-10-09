@@ -48,4 +48,16 @@ class LanguageEn extends BaseLanguage {
 
   @override
   String get submit => "Submit";
+
+  @override
+  String get changePassword => "Change password";
+
+  @override
+  String get confirmPasswordLabel => "Enter password again";
+
+  @override
+  String get otpLabel => "Enter one time password";
+
+  @override
+  String get passwordsDoNotMatch => "Passwords do not match!";
 }

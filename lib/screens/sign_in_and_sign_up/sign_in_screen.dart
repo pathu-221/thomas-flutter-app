@@ -39,7 +39,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
     UserDataModel? userData = await login(request);
     if (userData != null) {
-      toast("user data ${userData.firstName}");
+      toast("Logged in successfully!");
       MainMenuScreen().launch(context, isNewTask: true);
     }
   }

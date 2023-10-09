@@ -27,15 +27,15 @@ Future<Response> httpRequest(
           await http.post(url, body: jsonEncode(request), headers: header);
       break;
     case HttpMethodType.GET:
-      response = await http.get(url, headers: headers);
+      response = await http.get(url, headers: header);
       break;
     case HttpMethodType.PUT:
       response =
-          await http.put(url, body: jsonEncode(request), headers: headers);
+          await http.put(url, body: jsonEncode(request), headers: header);
       break;
     case HttpMethodType.DELETE:
       response =
-          await http.delete(url, body: jsonEncode(request), headers: headers);
+          await http.delete(url, body: jsonEncode(request), headers: header);
       break;
     default:
       response = await http.get(url, headers: headers);
