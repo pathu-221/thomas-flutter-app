@@ -15,10 +15,10 @@ class MainMenuScreen extends StatefulWidget {
 
 class _MainMenuScreenState extends State<MainMenuScreen> {
   final List<String> items = [
-    'Upload receipt',
-    'Save signature',
-    'My Receipts',
-    'Contact'
+    language.uploadReceipt,
+    language.saveSignatureTitle,
+    language.myReceipts,
+    language.contact,
   ];
 
   final screens = [

@@ -46,4 +46,6 @@ abstract class BaseLanguage {
   String get gallery;
 
   String get myReceipts;
+
+  String get contact;
 }

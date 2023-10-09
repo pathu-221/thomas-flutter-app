@@ -72,4 +72,7 @@ class LanguageEn extends BaseLanguage {
 
   @override
   String get myReceipts => "My receipts";
+
+  @override
+  String get contact => "Contact";
 }
