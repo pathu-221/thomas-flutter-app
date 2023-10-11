@@ -48,4 +48,26 @@ abstract class BaseLanguage {
   String get myReceipts;
 
   String get contact;
+
+  String get entertainmentReceipt;
+
+  String get entertainmentReceiptDate;
+
+  String get entertainmentReceiptLocation;
+
+  String get entertainmentReceiptOccasion;
+
+  String get entertainedPersons;
+
+  String get receiptNumber;
+
+  String get amount;
+
+  String get recipient;
+
+  String get entertainmentPurpose;
+
+  String get selfReceiptReason;
+
+  String get uploadImage;
 }

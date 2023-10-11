@@ -75,4 +75,37 @@ class LanguageEn extends BaseLanguage {
 
   @override
   String get contact => "Contact";
+
+  @override
+  String get entertainmentReceipt => "Entertainment receipt";
+
+  @override
+  String get entertainmentReceiptDate => "Entertainment date";
+
+  @override
+  String get entertainmentReceiptLocation => "Entertainment location";
+
+  @override
+  String get entertainmentReceiptOccasion => "Entertainment occasion";
+
+  @override
+  String get entertainedPersons => "Entertained persons";
+
+  @override
+  String get receiptNumber => "Receipt number";
+
+  @override
+  String get amount => "Amount";
+
+  @override
+  String get recipient => "Recipient";
+
+  @override
+  String get entertainmentPurpose => "Entertainment purpose";
+
+  @override
+  String get selfReceiptReason => "Self-receipt reason";
+
+  @override
+  String get uploadImage => "Upload image";
 }

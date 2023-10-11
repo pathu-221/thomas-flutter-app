@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_app/main.dart';
+import 'package:mobile_app/screens/main_menu/upload_receipt/entertainment_receipt_screen.dart';
+import 'package:mobile_app/screens/main_menu/upload_receipt/self_receipt_reason_screen.dart';
 import 'package:mobile_app/utils/configs.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:image_picker/image_picker.dart';
@@ -12,50 +14,6 @@ class UploadReceiptScreen extends StatefulWidget {
 }
 
 class _UploadReceiptScreenState extends State<UploadReceiptScreen> {
-  void _pickFromCamera() async {
-    final file = await ImagePicker().pickImage(source: ImageSource.camera);
-  }
-
-  void _pickFromGallery() async {
-    final file = await ImagePicker().pickImage(source: ImageSource.gallery);
-  }
-
-  void _showBottomSheet(BuildContext context) {
-    showModalBottomSheet(
-        context: context,
-        backgroundColor: context.cardColor,
-        builder: (context) {
-          return Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              SettingItemWidget(
-                title: language.camera,
-                leading: const Icon(
-                  Icons.camera,
-                  color: primaryColor,
-                ),
-                onTap: () {
-                  _pickFromCamera();
-                  finish(context);
-                },
-              ),
-              SettingItemWidget(
-                title: language.gallery,
-                leading: const Icon(
-                  Icons.image,
-                  color: primaryColor,
-                ),
-                onTap: () {
-                  _pickFromGallery();
-                  finish(context);
-                },
-              ),
-            ],
-          ).paddingAll(16);
-        });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -77,9 +35,20 @@ class _UploadReceiptScreenState extends State<UploadReceiptScreen> {
                 width: context.width(),
                 color: primaryColor,
                 textColor: Colors.white,
-                text: language.uploadReceipt,
+                text: language.entertainmentReceipt,
                 onTap: () {
-                  _showBottomSheet(context);
+                  EntertainmentReceiptScreen().launch(context);
+                },
+              ),
+              16.height,
+              AppButton(
+                width: context.width(),
+                color: primaryColor,
+                textColor: Colors.white,
+                text: language.selfReceiptReason,
+                onTap: () {
+                  //_showBottomSheet(context);
+                  SelfReceiptReasonScreen().launch(context);  
                 },
               ),
             ]),

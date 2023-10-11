@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:mobile_app/screens/main_menu/main_menu_screen.dart';
 import 'package:mobile_app/screens/sign_in_and_sign_up/sign_in_screen.dart';
 import 'package:mobile_app/utils/images.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 class CustomSplashScreen extends StatelessWidget {
-
-  
   @override
   Widget build(BuildContext context) {
     4.seconds.delay.then(

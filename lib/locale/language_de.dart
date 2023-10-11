@@ -75,4 +75,37 @@ class LanguageDe extends BaseLanguage {
 
   @override
   String get contact => "Kontakt";
+
+  @override
+  String get entertainmentReceipt => "Bewirtungsbeleg";
+
+  @override
+  String get entertainmentReceiptDate => "Datum der Bewirtung";
+
+  @override
+  String get entertainmentReceiptLocation => "Ort der Bewirtung";
+
+  @override
+  String get entertainmentReceiptOccasion => "Anlass der Bewirtung";
+
+  @override
+  String get entertainedPersons => "Bewirtete Personen";
+
+  @override
+  String get receiptNumber => "Belegnummer";
+
+  @override
+  String get amount => "Betrag";
+
+  @override
+  String get recipient => "Empfänger";
+
+  @override
+  String get entertainmentPurpose => "Verwendungszweck";
+
+  @override
+  String get selfReceiptReason => "Grund für Eigenbeleg";
+
+  @override
+  String get uploadImage => "Bild hochladen";
 }
