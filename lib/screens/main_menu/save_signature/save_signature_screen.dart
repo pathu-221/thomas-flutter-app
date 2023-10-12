@@ -22,17 +22,11 @@ class _SaveSignatureScreenState extends State<SaveSignatureScreen> {
 
   Future<File> byteDataToFile(ByteData byteData) async {
     final Uint8List uint8List = byteData.buffer.asUint8List();
-
-    // Get the temporary directory path
     final tempDir = Directory.systemTemp;
 
-    // Generate a unique filename
     final tempFileName = DateTime.now().millisecondsSinceEpoch.toString();
 
-    // Create a File instance in the temporary directory
     final File tempFile = File(join(tempDir.path, '$tempFileName.jpg'));
-
-    // Write the Uint8List data to the file
     await tempFile.writeAsBytes(uint8List);
 
     return tempFile;

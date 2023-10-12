@@ -4,9 +4,9 @@ import 'package:flutter/services.dart';
 import 'package:mobile_app/main.dart';
 import 'package:mobile_app/models/user_model.dart';
 import 'package:mobile_app/network/rest_apis/auth.dart';
-import 'package:mobile_app/screens/forgot_password_screen.dart';
-import 'package:mobile_app/screens/main_menu_screen.dart';
-import 'package:mobile_app/screens/sign_up_screen.dart';
+import 'package:mobile_app/screens/forgot_password/forgot_password_screen.dart';
+import 'package:mobile_app/screens/main_menu/main_menu_screen.dart';
+import 'package:mobile_app/screens/sign_in_and_sign_up/sign_up_screen.dart';
 import 'package:mobile_app/utils/common.dart';
 import 'package:mobile_app/utils/configs.dart';
 import 'package:nb_utils/nb_utils.dart';
@@ -39,7 +39,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
     UserDataModel? userData = await login(request);
     if (userData != null) {
-      toast("user data ${userData.firstName}");
+      toast("Logged in successfully!");
       MainMenuScreen().launch(context, isNewTask: true);
     }
   }
@@ -109,7 +109,6 @@ class _SignInScreenState extends State<SignInScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print('card color ${context.cardColor}');
     return Scaffold(
       appBar: AppBar(
         elevation: 0,

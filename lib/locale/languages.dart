@@ -7,6 +7,8 @@ abstract class BaseLanguage {
 
   String get forgotPassword;
 
+  String get confirmPasswordLabel;
+
   String get dontHaveAnAccount;
 
   String get alreadyHaveAnAccount;
@@ -30,4 +32,42 @@ abstract class BaseLanguage {
   String get resetPassword;
 
   String get submit;
+
+  String get changePassword;
+
+  String get otpLabel;
+
+  String get passwordsDoNotMatch;
+
+  String get uploadReceipt;
+
+  String get camera;
+
+  String get gallery;
+
+  String get myReceipts;
+
+  String get contact;
+
+  String get entertainmentReceipt;
+
+  String get entertainmentReceiptDate;
+
+  String get entertainmentReceiptLocation;
+
+  String get entertainmentReceiptOccasion;
+
+  String get entertainedPersons;
+
+  String get receiptNumber;
+
+  String get amount;
+
+  String get recipient;
+
+  String get entertainmentPurpose;
+
+  String get selfReceiptReason;
+
+  String get uploadImage;
 }
