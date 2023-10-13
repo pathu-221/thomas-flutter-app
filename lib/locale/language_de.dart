@@ -108,4 +108,7 @@ class LanguageDe extends BaseLanguage {
 
   @override
   String get uploadImage => "Bild hochladen";
+
+  @override
+  String get pleaseUploadImage => "Bitte Bild hochladen";
 }

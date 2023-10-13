@@ -70,4 +70,6 @@ abstract class BaseLanguage {
   String get selfReceiptReason;
 
   String get uploadImage;
+
+  String get pleaseUploadImage;
 }

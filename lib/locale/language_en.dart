@@ -108,4 +108,7 @@ class LanguageEn extends BaseLanguage {
 
   @override
   String get uploadImage => "Upload image";
+
+  @override
+  String get pleaseUploadImage => "Please upload image";
 }

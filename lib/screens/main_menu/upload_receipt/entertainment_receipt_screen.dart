@@ -1,6 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mobile_app/main.dart';
+import 'package:mobile_app/models/http_response_model.dart';
+import 'package:mobile_app/network/rest_apis/upload_receipt.dart';
 import 'package:mobile_app/utils/common.dart';
 import 'package:mobile_app/utils/configs.dart';
 import 'package:nb_utils/nb_utils.dart';
@@ -16,13 +20,52 @@ class EntertainmentReceiptScreen extends StatefulWidget {
 class _EntertainmentReceiptScreenState
     extends State<EntertainmentReceiptScreen> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final TextEditingController dateController = TextEditingController();
+  final TextEditingController locationController = TextEditingController();
+  final TextEditingController occasionController = TextEditingController();
+  final TextEditingController personsController = TextEditingController();
+  File? selectedImage;
 
   void _pickFromCamera() async {
-    final file = await ImagePicker().pickImage(source: ImageSource.camera);
+    final image = await ImagePicker().pickImage(source: ImageSource.camera);
+    if (image != null) {
+      selectedImage = File(image.path);
+      setState(() {});
+    }
   }
 
   void _pickFromGallery() async {
-    final file = await ImagePicker().pickImage(source: ImageSource.gallery);
+    final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (image != null) {
+      selectedImage = File(image.path);
+      setState(() {});
+    }
+  }
+
+  void _handleSubmit() async {
+    if (selectedImage == null) {
+      toast(language.pleaseUploadImage);
+      return;
+    }
+
+    Map<String, dynamic> request = {
+      "cateringDate": DateTime.now().millisecondsSinceEpoch.toString(),
+      "cateringAddress": locationController.text.validate(),
+      "occasion": occasionController.text.validate(),
+      "noOfPeople": personsController.text.validate(),
+    };
+
+    log(request);
+
+    HttpResponseModel? response = await uploadEntertainmenReceipt(
+        selectedImage!, '/entertainment-receipt', request);
+    if (response != null) {
+      toast(response.msg);
+
+      if (response.status == 1) {
+        finish(context);
+      }
+    }
   }
 
   void _showBottomSheet(BuildContext context) {
@@ -83,24 +126,28 @@ class _EntertainmentReceiptScreenState
       children: [
         AppTextField(
           textFieldType: TextFieldType.OTHER,
+          controller: dateController,
           decoration: inputDecoration(context,
               labelText: language.entertainmentReceiptDate),
         ),
         16.height,
         AppTextField(
           textFieldType: TextFieldType.OTHER,
+          controller: locationController,
           decoration: inputDecoration(context,
               labelText: language.entertainmentReceiptLocation),
         ),
         16.height,
         AppTextField(
           textFieldType: TextFieldType.OTHER,
+          controller: occasionController,
           decoration: inputDecoration(context,
               labelText: language.entertainmentReceiptOccasion),
         ),
         16.height,
         AppTextField(
           textFieldType: TextFieldType.OTHER,
+          controller: personsController,
           decoration:
               inputDecoration(context, labelText: language.entertainedPersons),
         ),
@@ -132,6 +179,31 @@ class _EntertainmentReceiptScreenState
     );
   }
 
+  Widget _imageWidget() {
+    return Stack(
+      alignment: Alignment.topRight,
+      children: [
+        Image.file(selectedImage!, height: 100), // Display the selected image
+        Positioned(
+          right: -10,
+          top: -20,
+          child: IconButton(
+            color: primaryColor,
+            icon: const Icon(
+              Icons.close,
+              color: Colors.white,
+            ), // You can change the icon as needed
+            onPressed: () {
+              setState(() {
+                selectedImage = null; // Remove the selected image
+              });
+            },
+          ),
+        )
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -154,12 +226,13 @@ class _EntertainmentReceiptScreenState
               _titleWidget(),
               16.height,
               uploadImage(),
+              if (selectedImage != null) ...[16.height, _imageWidget()],
               16.height,
               _formInputFieldWidget(),
               16.height,
               AppButton(
                 width: context.width(),
-                onTap: () {},
+                onTap: _handleSubmit,
                 text: language.submit,
                 color: primaryColor,
                 textColor: Colors.white,

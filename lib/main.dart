@@ -6,7 +6,7 @@ import 'package:mobile_app/screens/splash_screen.dart';
 import 'package:mobile_app/utils/configs.dart';
 import 'package:nb_utils/nb_utils.dart';
 
-BaseLanguage language = LanguageDe();
+BaseLanguage language = LanguageEn();
 
 void main() async {
   // debugShowCheckedModeBanner = false;
