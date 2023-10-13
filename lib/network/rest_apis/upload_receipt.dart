@@ -14,7 +14,6 @@ Future<HttpResponseModel?> uploadEntertainmenReceipt(
   final Uri uri = Uri.parse('$BASE_URL$endpoint');
   final token = getStringAsync(AUTH_TOKEN);
 
-  log('token $token');
   final request = MultipartRequest('POST', uri);
   request.headers['Authorization'] = 'Bearer $token';
 
