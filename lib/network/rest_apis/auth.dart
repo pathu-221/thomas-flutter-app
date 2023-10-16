@@ -49,7 +49,7 @@ Future<UserDataModel?> login(Map requestBody) async {
 }
 
 Future<UserDataModel?> authenticate() async {
-  Response response =
+  Response? response =
       await requestWithToken('/auth', method: HttpMethodType.GET);
 
   final jsonResponse = jsonDecode(response.body);
@@ -61,7 +61,7 @@ Future<UserDataModel?> authenticate() async {
     throw ErrorDescription(responseData.msg ?? "Something went wrong!");
   }
 
-  UserDataModel data = UserDataModel.fromJson(responseData.data['user']);
+  UserDataModel data = UserDataModel.fromJson(responseData.data);
 
   return data;
 }

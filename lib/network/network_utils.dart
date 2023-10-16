@@ -51,9 +51,8 @@ Future<Response> requestWithToken(
   Map<String, String>? headers,
 }) async {
   String token = getStringAsync(AUTH_TOKEN);
-
   Map<String, String> header = {
-    HttpHeaders.authorizationHeader: "Bearer $token",
+    HttpHeaders.authorizationHeader: token.isNotEmpty ? "Bearer $token" : "",
   };
 
   if (headers != null) header.addAll(headers);

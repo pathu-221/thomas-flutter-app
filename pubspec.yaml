@@ -19,6 +19,9 @@ dependencies:
   http: ^1.1.0
   hand_signature: ^3.0.1
   image_picker: ^1.0.4
+  mobx: ^2.2.0
+  build_runner: ^2.4.6
+  mobx_codegen: ^2.4.0
 
 dev_dependencies:
   flutter_test:

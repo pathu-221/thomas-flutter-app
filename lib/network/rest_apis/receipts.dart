@@ -8,6 +8,7 @@ Future<HttpResponseModel> getMyReceipts() async {
   final response =
       await requestWithToken('/receipts', method: HttpMethodType.GET);
 
+  
   final jsonResponse = jsonDecode(response.body);
 
   HttpResponseModel httpResponse = HttpResponseModel.fromJson(jsonResponse);

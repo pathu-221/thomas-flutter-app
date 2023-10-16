@@ -40,6 +40,9 @@ class _SignInScreenState extends State<SignInScreen> {
     UserDataModel? userData = await login(request);
     if (userData != null) {
       toast("Logged in successfully!");
+      appStore.setUserFirstName(userData.firstName!);
+      appStore.setIsLoggedIn(true);
+      appStore.setUserLastName(userData.lastName!);
       MainMenuScreen().launch(context, isNewTask: true);
     }
   }
