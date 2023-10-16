@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+import 'package:mobile_app/main.dart';
 import 'package:mobile_app/models/http_response_model.dart';
 import 'package:mobile_app/models/user_model.dart';
 import 'package:mobile_app/network/network_utils.dart';
@@ -46,6 +47,13 @@ Future<UserDataModel?> login(Map requestBody) async {
   UserDataModel data = UserDataModel.fromJson(responseData.data['user']);
 
   return data;
+}
+
+Future logout() async {
+  appStore.setIsLoggedIn(false);
+  appStore.setUserFirstName('');
+  appStore.setUserLastName('');
+  setValue(AUTH_TOKEN, '');
 }
 
 Future<UserDataModel?> authenticate() async {

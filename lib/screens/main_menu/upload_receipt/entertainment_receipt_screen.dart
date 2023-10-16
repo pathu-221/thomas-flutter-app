@@ -8,6 +8,7 @@ import 'package:mobile_app/network/rest_apis/upload_receipt.dart';
 import 'package:mobile_app/utils/common.dart';
 import 'package:mobile_app/utils/configs.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:intl/intl.dart';
 
 class EntertainmentReceiptScreen extends StatefulWidget {
   const EntertainmentReceiptScreen({super.key});
@@ -20,8 +21,9 @@ class EntertainmentReceiptScreen extends StatefulWidget {
 class _EntertainmentReceiptScreenState
     extends State<EntertainmentReceiptScreen> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  final TextEditingController dateController = TextEditingController();
+  DateTime? pickedDate;
   final TextEditingController locationController = TextEditingController();
+  final TextEditingController dateController = TextEditingController();
   final TextEditingController occasionController = TextEditingController();
   final TextEditingController personsController = TextEditingController();
   File? selectedImage;
@@ -49,7 +51,7 @@ class _EntertainmentReceiptScreenState
     }
 
     Map<String, dynamic> request = {
-      "cateringDate": DateTime.now().millisecondsSinceEpoch.toString(),
+      "cateringDate": pickedDate!.millisecondsSinceEpoch.toString(),
       "cateringAddress": locationController.text.validate(),
       "occasion": occasionController.text.validate(),
       "noOfPeople": personsController.text.validate(),
@@ -120,15 +122,38 @@ class _EntertainmentReceiptScreenState
     );
   }
 
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime picked = (await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2101),
+    ))!;
+    if (picked != null) {
+      pickedDate = picked;
+      dateController.text = DateFormat('yyyy-MM-dd').format(picked);
+      setState(() {});
+    }
+  }
+
   Widget _formInputFieldWidget() {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        AppTextField(
-          textFieldType: TextFieldType.OTHER,
-          controller: dateController,
-          decoration: inputDecoration(context,
-              labelText: language.entertainmentReceiptDate),
+        GestureDetector(
+          onTap: () {
+            _selectDate(context); // Show the date picker on tap
+          },
+          child: AbsorbPointer(
+            child: AppTextField(
+              textFieldType: TextFieldType.OTHER,
+              controller: dateController,
+              decoration: inputDecoration(
+                context,
+                labelText: language.entertainmentReceiptDate,
+              ),
+            ),
+          ),
         ),
         16.height,
         AppTextField(
@@ -185,19 +210,22 @@ class _EntertainmentReceiptScreenState
       children: [
         Image.file(selectedImage!, height: 100), // Display the selected image
         Positioned(
-          right: -10,
-          top: -20,
-          child: IconButton(
+          right: -2,
+          top: -9,
+          child: Container(
             color: primaryColor,
-            icon: const Icon(
-              Icons.close,
-              color: Colors.white,
-            ), // You can change the icon as needed
-            onPressed: () {
-              setState(() {
-                selectedImage = null; // Remove the selected image
-              });
-            },
+            child: GestureDetector(
+              child: const Icon(
+                Icons.close,
+                color: Colors.white,
+              ),
+              // You can change the icon as needed
+              onTap: () {
+                setState(() {
+                  selectedImage = null; // Remove the selected image
+                });
+              },
+            ),
           ),
         )
       ],

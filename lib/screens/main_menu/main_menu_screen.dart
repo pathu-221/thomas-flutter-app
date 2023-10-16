@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_app/main.dart';
+import 'package:mobile_app/network/rest_apis/auth.dart';
 import 'package:mobile_app/screens/main_menu/my_receips/my_receipts_screen.dart';
 import 'package:mobile_app/screens/main_menu/save_signature/save_signature_screen.dart';
 import 'package:mobile_app/screens/main_menu/upload_receipt/upload_receipt_screen.dart';
+import 'package:mobile_app/screens/sign_in_and_sign_up/sign_in_screen.dart';
 import 'package:mobile_app/utils/configs.dart';
 import 'package:nb_utils/nb_utils.dart';
 
@@ -28,6 +30,11 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
     null
   ];
 
+  void _handleLogout() async {
+    await logout();
+    SignInScreen().launch(context, isNewTask: true);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,6 +42,11 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
         title: Text(language.lblMainMenu,
             style: boldTextStyle(color: Colors.white)),
         backgroundColor: primaryColor,
+        actions: [
+          IconButton(
+              onPressed: _handleLogout, icon: const Icon(Icons.logout_rounded))
+        ],
+        actionsIconTheme: const IconThemeData(color: Colors.white),
       ),
       body: Container(
         padding: const EdgeInsets.all(16),
