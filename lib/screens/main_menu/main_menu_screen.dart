@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_app/main.dart';
 import 'package:mobile_app/screens/contact/contact_fragment.dart';
-import 'package:mobile_app/screens/main_menu/my_receips/my_receipts_screen.dart';
+import 'package:mobile_app/screens/main_menu/my_receipts/my_receipts_screen.dart';
 import 'package:mobile_app/screens/profile/profile_fragement.dart';
 import 'package:mobile_app/utils/configs.dart';
 

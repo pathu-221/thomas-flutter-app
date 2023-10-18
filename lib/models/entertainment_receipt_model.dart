@@ -1,11 +1,10 @@
 class EntertainmentReceiptModel {
   String id;
   String image;
-  String cateringPlace;
   String cateringAddress;
   String occasion;
   int noOfPeople;
-  String userId;
+  double amount;
   DateTime createdAt;
   DateTime updatedAt;
   DateTime? deletedAt;
@@ -13,11 +12,10 @@ class EntertainmentReceiptModel {
   EntertainmentReceiptModel({
     required this.id,
     required this.image,
-    required this.cateringPlace,
+    required this.amount,
     required this.cateringAddress,
     required this.occasion,
     required this.noOfPeople,
-    required this.userId,
     required this.createdAt,
     required this.updatedAt,
     this.deletedAt,
@@ -27,11 +25,10 @@ class EntertainmentReceiptModel {
     return EntertainmentReceiptModel(
       id: json['id'],
       image: json['image'],
-      cateringPlace: json['cateringPlace'],
-      cateringAddress: json['cateringAddres'],
-      occasion: json['occasion'],
+      cateringAddress: json['cateringAddress'],
+      occasion: json['occassion'],
       noOfPeople: json['noOfPeople'],
-      userId: json['userId'],
+      amount: json['amount']?.toDouble() ?? 0.0,
       createdAt: DateTime.parse(json['createdAt']),
       updatedAt: DateTime.parse(json['updatedAt']),
     );
@@ -40,7 +37,6 @@ class EntertainmentReceiptModel {
   Map<String, dynamic> toJson() {
     return {
       "image": image,
-      "cateringPlace": cateringPlace,
       "cateringAddres": cateringAddress,
       "occasion": occasion,
       "noOfPeople": noOfPeople,

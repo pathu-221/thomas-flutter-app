@@ -54,12 +54,11 @@ class _EntertainmentReceiptScreenState
     Map<String, dynamic> request = {
       "cateringDate": pickedDate!.millisecondsSinceEpoch.toString(),
       "cateringAddress": locationController.text.validate(),
-      "occasion": occasionController.text.validate(),
+      "occassion": occasionController.text.validate(),
       "noOfPeople": personsController.text.validate(),
       "amount": amountCont.text.validate(),
     };
 
-    log(request);
 
     HttpResponseModel? response = await uploadEntertainmenReceipt(
         selectedImage!, '/entertainment-receipt', request);

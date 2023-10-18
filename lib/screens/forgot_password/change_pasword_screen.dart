@@ -40,7 +40,6 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
       "password": passwordCont.text,
     };
 
-    print(jsonEncode(requestBody));
 
     HttpResponseModel response = await updatePassword(requestBody);
 
