@@ -5,6 +5,9 @@ class LanguageDe extends BaseLanguage {
   String get login => "Anmelden";
 
   @override
+  String get logout => "Ausloggen";
+
+  @override
   String get emailLabel => "Geben Sie Ihre E-Mail-Adresse ein";
 
   @override
@@ -111,4 +114,7 @@ class LanguageDe extends BaseLanguage {
 
   @override
   String get pleaseUploadImage => "Bitte Bild hochladen";
+
+  @override
+  String get profile => "Profil";
 }

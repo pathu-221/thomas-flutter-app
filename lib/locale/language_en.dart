@@ -5,6 +5,9 @@ class LanguageEn extends BaseLanguage {
   String get login => "Login";
 
   @override
+  String get logout => "Logout";  
+
+  @override
   String get emailLabel => "Email";
 
   @override
@@ -111,4 +114,7 @@ class LanguageEn extends BaseLanguage {
 
   @override
   String get pleaseUploadImage => "Please upload image";
+
+  @override
+  String get profile => "Profile";
 }

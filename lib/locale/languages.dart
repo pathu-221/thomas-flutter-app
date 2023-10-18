@@ -1,6 +1,8 @@
 abstract class BaseLanguage {
   String get login;
 
+  String get logout;
+
   String get emailLabel;
 
   String get passwordLabel;
@@ -72,4 +74,6 @@ abstract class BaseLanguage {
   String get uploadImage;
 
   String get pleaseUploadImage;
+
+  String get profile;
 }

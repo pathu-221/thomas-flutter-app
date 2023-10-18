@@ -37,7 +37,7 @@ class _UploadReceiptScreenState extends State<UploadReceiptScreen> {
                 textColor: Colors.white,
                 text: language.entertainmentReceipt,
                 onTap: () {
-                  EntertainmentReceiptScreen().launch(context);
+                  const EntertainmentReceiptScreen().launch(context);
                 },
               ),
               16.height,
@@ -48,7 +48,7 @@ class _UploadReceiptScreenState extends State<UploadReceiptScreen> {
                 text: language.selfReceiptReason,
                 onTap: () {
                   //_showBottomSheet(context);
-                  SelfReceiptReasonScreen().launch(context);  
+                  const SelfReceiptReasonScreen().launch(context);  
                 },
               ),
             ]),

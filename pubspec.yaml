@@ -23,6 +23,7 @@ dependencies:
   build_runner: ^2.4.6
   mobx_codegen: ^2.4.0
   intl: ^0.18.1
+  flutter_speed_dial: ^7.0.0
 
 dev_dependencies:
   flutter_test:

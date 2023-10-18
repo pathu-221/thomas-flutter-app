@@ -7,8 +7,8 @@ import 'package:mobile_app/utils/images.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 class CustomSplashScreen extends StatelessWidget {
+  const CustomSplashScreen({super.key});
 
-  
   @override
   Widget build(BuildContext context) {
     4.seconds.delay.then(((value) {
