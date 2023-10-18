@@ -5,10 +5,10 @@ class LanguageEn extends BaseLanguage {
   String get login => "Login";
 
   @override
-  String get emailLabel => "Enter your email";
+  String get emailLabel => "Email";
 
   @override
-  String get passwordLabel => "Enter your password";
+  String get passwordLabel => "Password";
 
   @override
   String get forgotPassword => "Forgot Password";
@@ -26,10 +26,10 @@ class LanguageEn extends BaseLanguage {
   String get createAnAccount => "Create an account";
 
   @override
-  String get lblFirstName => "Enter your first name";
+  String get lblFirstName => "First name";
 
   @override
-  String get lblLastName => "Enter your last name";
+  String get lblLastName => "Fast name";
 
   @override
   String get lblMainMenu => "Main Menu";
@@ -53,10 +53,10 @@ class LanguageEn extends BaseLanguage {
   String get changePassword => "Change password";
 
   @override
-  String get confirmPasswordLabel => "Enter password again";
+  String get confirmPasswordLabel => "Re-enter password";
 
   @override
-  String get otpLabel => "Enter one time password";
+  String get otpLabel => "One Time Password ";
 
   @override
   String get passwordsDoNotMatch => "Passwords do not match!";

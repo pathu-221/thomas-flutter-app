@@ -9,6 +9,7 @@ import 'package:mobile_app/screens/main_menu/main_menu_screen.dart';
 import 'package:mobile_app/screens/sign_in_and_sign_up/sign_up_screen.dart';
 import 'package:mobile_app/utils/common.dart';
 import 'package:mobile_app/utils/configs.dart';
+import 'package:mobile_app/utils/images.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -23,17 +24,6 @@ class _SignInScreenState extends State<SignInScreen> {
   TextEditingController emailCont = TextEditingController();
   TextEditingController passCont = TextEditingController();
 
-  Widget _buildTopWidget() {
-    return Container(
-      child: Column(
-        children: [
-          Text("${language.login}!", style: boldTextStyle(size: 20)).center(),
-          16.height,
-        ],
-      ),
-    );
-  }
-
   void _loginUser() async {
     Map request = {"email": emailCont.text, "password": passCont.text};
 
@@ -45,6 +35,19 @@ class _SignInScreenState extends State<SignInScreen> {
       appStore.setUserLastName(userData.lastName!);
       MainMenuScreen().launch(context, isNewTask: true);
     }
+  }
+
+  Widget _buildTopWidget() {
+    return Column(
+      children: [
+        Container(
+          padding: const EdgeInsets.all(32),
+          child: Image.asset(app_logo),
+        ),
+        Text("${language.login}!", style: boldTextStyle(size: 20)).center(),
+        16.height,
+      ],
+    );
   }
 
   Widget _buildFormWidget() {

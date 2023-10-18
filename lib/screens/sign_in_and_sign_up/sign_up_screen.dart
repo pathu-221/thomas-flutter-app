@@ -6,6 +6,7 @@ import 'package:mobile_app/models/user_model.dart';
 import 'package:mobile_app/network/rest_apis/auth.dart';
 import 'package:mobile_app/utils/common.dart';
 import 'package:mobile_app/utils/configs.dart';
+import 'package:mobile_app/utils/images.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -38,14 +39,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   Widget _buildTopWidget() {
-    return Container(
-      child: Column(
-        children: [
-          Text(language.createAnAccount, style: boldTextStyle(size: 20))
-              .center(),
-          16.height,
-        ],
-      ),
+    return Column(
+      children: [
+        Container(
+          padding: const EdgeInsets.all(32),
+          child: Image.asset(app_logo),
+        ),
+        Text(language.createAnAccount, style: boldTextStyle(size: 20)).center(),
+        16.height,
+      ],
     );
   }
 
