@@ -129,5 +129,5 @@ class LanguageDe extends BaseLanguage {
 
   @override
   String get resetPasswordCaption =>
-      "Wir senden Ihnen per E-Mail einen Bestätigungscode zu";
+      "Wir senden Ihnen einen Bestätigungscode per E-Mail";
 }

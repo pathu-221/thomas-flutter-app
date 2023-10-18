@@ -24,6 +24,7 @@ class _EntertainmentReceiptScreenState
   DateTime? pickedDate;
   final TextEditingController locationController = TextEditingController();
   final TextEditingController dateController = TextEditingController();
+  final TextEditingController amountCont = TextEditingController();
   final TextEditingController occasionController = TextEditingController();
   final TextEditingController personsController = TextEditingController();
   File? selectedImage;
@@ -55,6 +56,7 @@ class _EntertainmentReceiptScreenState
       "cateringAddress": locationController.text.validate(),
       "occasion": occasionController.text.validate(),
       "noOfPeople": personsController.text.validate(),
+      "amount": amountCont.text.validate(),
     };
 
     log(request);
@@ -175,6 +177,12 @@ class _EntertainmentReceiptScreenState
           controller: personsController,
           decoration:
               inputDecoration(context, labelText: language.entertainedPersons),
+        ),
+        16.height,
+        AppTextField(
+          textFieldType: TextFieldType.NUMBER,
+          controller: amountCont,
+          decoration: inputDecoration(context, labelText: language.amount),
         ),
       ],
     );
