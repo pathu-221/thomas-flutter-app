@@ -43,11 +43,12 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: language.login,
         theme: ThemeData(
+          iconTheme: const IconThemeData(color: Colors.grey),
           cardColor: Colors.grey.shade200,
           colorScheme: ColorScheme.fromSeed(seedColor: primaryColor),
           useMaterial3: true,
         ),
-        home: CustomSplashScreen(),
+        home: const CustomSplashScreen(),
       ),
     );
   }

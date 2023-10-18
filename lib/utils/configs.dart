@@ -4,3 +4,4 @@ const BASE_URL = 'http://192.168.1.34:3008';
 const DEFAULT_LANGUAGE = 'en';
 
 const primaryColor = Color(0xFF106FB7);
+const dangerColor = Colors.red;

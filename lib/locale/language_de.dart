@@ -117,4 +117,13 @@ class LanguageDe extends BaseLanguage {
 
   @override
   String get profile => "Profil";
+
+  @override
+  String get general => "Allgemein";
+
+  @override
+  String get danger => "Gefahr";
+
+  @override
+  String get deleteAccount => "Konto löschen";
 }

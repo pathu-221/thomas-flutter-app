@@ -117,4 +117,13 @@ class LanguageEn extends BaseLanguage {
 
   @override
   String get profile => "Profile";
+
+  @override
+  String get general => "General";
+
+  @override
+  String get danger => "Danger";
+
+  @override
+  String get deleteAccount => "Delete account";
 }

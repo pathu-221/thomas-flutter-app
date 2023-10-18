@@ -76,4 +76,10 @@ abstract class BaseLanguage {
   String get pleaseUploadImage;
 
   String get profile;
+
+  String get general;
+
+  String get danger;
+
+  String get deleteAccount;
 }

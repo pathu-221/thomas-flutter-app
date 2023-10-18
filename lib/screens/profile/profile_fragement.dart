@@ -46,20 +46,48 @@ class _ProfileFragementState extends State<ProfileFragement>
         ),
       ),
       body: Column(children: [
-        SettingItemWidget(
-          leading: const Icon(Icons.edit_outlined),
-          title: language.saveSignatureTitle,
-          onTap: () {
-            const SaveSignatureScreen().launch(context);
-          },
-        ),
-        SettingItemWidget(
-          leading: const Icon(Icons.logout_outlined),
-          title: language.logout,
-          onTap: () {
-            _handleLogout();
-          },
-        )
+        SettingSection(
+            title: Text(language.general,
+                style: boldTextStyle(color: primaryColor)),
+            headingDecoration:
+                BoxDecoration(color: context.primaryColor.withOpacity(0.1)),
+            divider: const Offstage(),
+            items: [
+              SettingItemWidget(
+                leading: const Icon(Icons.edit_outlined),
+                title: language.saveSignatureTitle,
+                onTap: () {
+                  const SaveSignatureScreen().launch(context);
+                },
+              ),
+              SettingSection(
+                title: Text(language.danger,
+                    style: boldTextStyle(color: dangerColor)),
+                headingDecoration:
+                    BoxDecoration(color: dangerColor.withOpacity(0.1)),
+                divider: const Offstage(),
+                items: [
+                  SettingItemWidget(
+                    leading: const Icon(
+                      Icons.person_remove_rounded,
+                    ),
+                    title: language.deleteAccount,
+                    onTap: () {},
+                  ),
+                ],
+              ),
+              Center(
+                child: TextButton(
+                  child: Text(
+                    language.logout,
+                    style: boldTextStyle(size: 18, color: primaryColor),
+                  ),
+                  onPressed: () {
+                    _handleLogout();
+                  },
+                ),
+              ),
+            ])
       ]),
     );
   }

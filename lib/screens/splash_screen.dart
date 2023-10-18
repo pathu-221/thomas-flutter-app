@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:mobile_app/main.dart';
 import 'package:mobile_app/screens/main_menu/main_menu_screen.dart';
 import 'package:mobile_app/screens/sign_in_and_sign_up/sign_in_screen.dart';
