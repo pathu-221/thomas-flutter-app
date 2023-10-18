@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_app/main.dart';
-import 'package:mobile_app/network/rest_apis/auth.dart';
 import 'package:mobile_app/screens/contact/contact_fragment.dart';
 import 'package:mobile_app/screens/main_menu/my_receips/my_receipts_screen.dart';
-import 'package:mobile_app/screens/main_menu/save_signature/save_signature_screen.dart';
 import 'package:mobile_app/screens/profile/profile_fragement.dart';
-import 'package:mobile_app/screens/sign_in_and_sign_up/sign_in_screen.dart';
 import 'package:mobile_app/utils/configs.dart';
-import 'package:nb_utils/nb_utils.dart';
 
 class MainMenuScreen extends StatefulWidget {
   const MainMenuScreen({super.key});

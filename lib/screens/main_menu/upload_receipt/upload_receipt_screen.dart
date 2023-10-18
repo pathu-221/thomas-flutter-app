@@ -4,7 +4,6 @@ import 'package:mobile_app/screens/main_menu/upload_receipt/entertainment_receip
 import 'package:mobile_app/screens/main_menu/upload_receipt/self_receipt_reason_screen.dart';
 import 'package:mobile_app/utils/configs.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:image_picker/image_picker.dart';
 
 class UploadReceiptScreen extends StatefulWidget {
   const UploadReceiptScreen({super.key});
