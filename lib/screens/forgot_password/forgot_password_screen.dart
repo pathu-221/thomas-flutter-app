@@ -36,6 +36,26 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
     }
   }
 
+  Widget _topWidget() {
+    return Container(
+      padding: const EdgeInsets.only(top: 40),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            language.resetPassword,
+            style: boldTextStyle(size: 25),
+          ),
+          16.height,
+          Text(
+            language.resetPasswordCaption,
+            style: primaryTextStyle(color: Colors.grey),
+          )
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,28 +67,36 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
           style: boldTextStyle(color: Colors.white),
         ),
       ),
-      body: Form(
-        key: formkey,
-        autovalidateMode: AutovalidateMode.onUserInteraction,
-        child: Container(
-          padding: const EdgeInsets.only(top: 50, left: 16, right: 16),
-          child: Column(children: [
-            AppTextField(
-              controller: emailCont,
-              textFieldType: TextFieldType.EMAIL,
-              decoration:
-                  inputDecoration(context, labelText: language.emailLabel),
+      body: Column(
+        children: [
+          _topWidget(),
+          Form(
+            key: formkey,
+            autovalidateMode: AutovalidateMode.onUserInteraction,
+            child: Container(
+              padding: const EdgeInsets.only(top: 20, left: 16, right: 16),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  AppTextField(
+                    controller: emailCont,
+                    textFieldType: TextFieldType.EMAIL,
+                    decoration: inputDecoration(context,
+                        labelText: language.emailLabel),
+                  ),
+                  16.height,
+                  AppButton(
+                    width: context.width(),
+                    onTap: _handleSubmit,
+                    text: language.submit,
+                    color: primaryColor,
+                    textColor: Colors.white,
+                  ),
+                ],
+              ),
             ),
-            16.height,
-            AppButton(
-              width: context.width(),
-              onTap: _handleSubmit,
-              text: language.submit,
-              color: primaryColor,
-              textColor: Colors.white,
-            ),
-          ]),
-        ),
+          ),
+        ],
       ),
     );
   }

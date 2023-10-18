@@ -82,4 +82,6 @@ abstract class BaseLanguage {
   String get danger;
 
   String get deleteAccount;
+
+  String get resetPasswordCaption;
 }

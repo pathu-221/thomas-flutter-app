@@ -5,7 +5,7 @@ class LanguageEn extends BaseLanguage {
   String get login => "Login";
 
   @override
-  String get logout => "Logout";  
+  String get logout => "Logout";
 
   @override
   String get emailLabel => "Email";
@@ -126,4 +126,8 @@ class LanguageEn extends BaseLanguage {
 
   @override
   String get deleteAccount => "Delete account";
+
+  @override
+  String get resetPasswordCaption =>
+      "We will an confirmation code to your email";
 }

@@ -126,4 +126,8 @@ class LanguageDe extends BaseLanguage {
 
   @override
   String get deleteAccount => "Konto löschen";
+
+  @override
+  String get resetPasswordCaption =>
+      "Wir senden Ihnen per E-Mail einen Bestätigungscode zu";
 }
