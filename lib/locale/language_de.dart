@@ -113,6 +113,9 @@ class LanguageDe extends BaseLanguage {
   String get uploadImage => "Bild hochladen";
 
   @override
+  String get changeImage => "Bild ändern";
+
+  @override
   String get pleaseUploadImage => "Bitte Bild hochladen";
 
   @override
@@ -130,4 +133,7 @@ class LanguageDe extends BaseLanguage {
   @override
   String get resetPasswordCaption =>
       "Wir senden Ihnen einen Bestätigungscode per E-Mail";
+
+  @override
+  String get addAtleastOnePerson => "Fügen Sie mindestens eine Person hinzu";
 }

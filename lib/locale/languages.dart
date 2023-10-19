@@ -73,6 +73,8 @@ abstract class BaseLanguage {
 
   String get uploadImage;
 
+  String get changeImage;
+
   String get pleaseUploadImage;
 
   String get profile;
@@ -84,4 +86,6 @@ abstract class BaseLanguage {
   String get deleteAccount;
 
   String get resetPasswordCaption;
+
+  String get addAtleastOnePerson;
 }

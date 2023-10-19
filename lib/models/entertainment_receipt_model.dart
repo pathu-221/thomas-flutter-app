@@ -1,9 +1,11 @@
+import 'dart:convert';
+
 class EntertainmentReceiptModel {
   String id;
   String image;
   String cateringAddress;
   String occasion;
-  int noOfPeople;
+  List<String> entertainedPersons;
   double amount;
   DateTime createdAt;
   DateTime updatedAt;
@@ -15,7 +17,7 @@ class EntertainmentReceiptModel {
     required this.amount,
     required this.cateringAddress,
     required this.occasion,
-    required this.noOfPeople,
+    required this.entertainedPersons,
     required this.createdAt,
     required this.updatedAt,
     this.deletedAt,
@@ -27,7 +29,8 @@ class EntertainmentReceiptModel {
       image: json['image'],
       cateringAddress: json['cateringAddress'],
       occasion: json['occassion'],
-      noOfPeople: json['noOfPeople'],
+      entertainedPersons:
+          List<String>.from(jsonDecode(json['entertainedPersons'])),
       amount: json['amount']?.toDouble() ?? 0.0,
       createdAt: DateTime.parse(json['createdAt']),
       updatedAt: DateTime.parse(json['updatedAt']),
@@ -39,7 +42,6 @@ class EntertainmentReceiptModel {
       "image": image,
       "cateringAddres": cateringAddress,
       "occasion": occasion,
-      "noOfPeople": noOfPeople,
     };
   }
 }

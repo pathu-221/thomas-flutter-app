@@ -77,13 +77,14 @@ class _SignInScreenState extends State<SignInScreen> {
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
         TextButton(
-            onPressed: () {
-              const ForgotPasswordScreen().launch(context);
-            },
-            child: Text(
-              language.forgotPassword,
-              style: boldTextStyle(color: primaryColor),
-            ))
+          onPressed: () {
+            const ForgotPasswordScreen().launch(context);
+          },
+          child: Text(
+            language.forgotPassword,
+            style: boldTextStyle(color: primaryColor),
+          ),
+        ),
       ],
     );
   }

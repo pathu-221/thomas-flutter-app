@@ -85,10 +85,10 @@ class _MyReceiptsScreenState extends State<MyReceiptsScreen> {
       floatingActionButton: SpeedDial(
         openCloseDial: isDialOpen,
         backgroundColor: primaryColor,
-        iconTheme: const IconThemeData(color: Colors.white),
-        animatedIcon: isDialOpen.value
-            ? AnimatedIcons.menu_close
-            : AnimatedIcons.add_event,
+        activeChild: const Icon(
+          Icons.close,
+          color: Colors.white,
+        ),
         animatedIconTheme: const IconThemeData(color: Colors.white),
         overlayColor: Colors.black,
         overlayOpacity: 0.6,
@@ -124,6 +124,10 @@ class _MyReceiptsScreenState extends State<MyReceiptsScreen> {
             },
           ),
         ],
+        child: const Icon(
+          Icons.add,
+          color: Colors.white,
+        ),
       ),
     );
   }

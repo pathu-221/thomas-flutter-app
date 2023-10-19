@@ -113,6 +113,9 @@ class LanguageEn extends BaseLanguage {
   String get uploadImage => "Upload image";
 
   @override
+  String get changeImage => "Change image";
+
+  @override
   String get pleaseUploadImage => "Please upload image";
 
   @override
@@ -130,4 +133,7 @@ class LanguageEn extends BaseLanguage {
   @override
   String get resetPasswordCaption =>
       "We will send a confirmation code to your email";
+
+  @override
+  String get addAtleastOnePerson => "Add atleast one person";
 }

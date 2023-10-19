@@ -1,5 +1,5 @@
+import 'dart:convert';
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mobile_app/main.dart';
@@ -28,6 +28,7 @@ class _EntertainmentReceiptScreenState
   final TextEditingController occasionController = TextEditingController();
   final TextEditingController personsController = TextEditingController();
   File? selectedImage;
+  List<String> entertainedPersons = [];
 
   void _pickFromCamera() async {
     final image = await ImagePicker().pickImage(source: ImageSource.camera);
@@ -51,11 +52,16 @@ class _EntertainmentReceiptScreenState
       return;
     }
 
+    if (entertainedPersons.isEmpty) {
+      toast(language.addAtleastOnePerson);
+      return;
+    }
+
     Map<String, dynamic> request = {
       "cateringDate": pickedDate!.millisecondsSinceEpoch.toString(),
       "cateringAddress": locationController.text.validate(),
       "occassion": occasionController.text.validate(),
-      "noOfPeople": personsController.text.validate(),
+      "entertainedPersons": jsonEncode(entertainedPersons),
       "amount": amountCont.text.validate(),
     };
 
@@ -136,6 +142,61 @@ class _EntertainmentReceiptScreenState
     }
   }
 
+  Widget _personsInputFieldWidget() {
+    return Column(
+      children: [
+        AppTextField(
+          textFieldType: TextFieldType.OTHER,
+          controller: personsController,
+          decoration:
+              inputDecoration(context, labelText: language.entertainedPersons),
+          suffix: IconButton(
+            color: primaryColor,
+            onPressed: () {
+              if (personsController.text.isEmpty) return;
+              entertainedPersons.add(personsController.text);
+              personsController.text = '';
+              setState(() {});
+            },
+            icon: const Icon(Icons.add),
+          ),
+        ),
+        if (entertainedPersons.isNotEmpty)
+          for (String persons in entertainedPersons)
+            Container(
+              padding: const EdgeInsets.only(top: 8),
+              child: Stack(
+                children: [
+                  AppTextField(
+                    textFieldType: TextFieldType.OTHER,
+                    decoration: inputDecoration(context, labelText: persons),
+                    enabled: false,
+                  ),
+                  Positioned(
+                    right: 0,
+                    top: 0,
+                    child: GestureDetector(
+                      onTap: () {
+                        entertainedPersons.remove(persons);
+                        setState(() {});
+                      },
+                      child: IconButton(
+                        color: primaryColor,
+                        onPressed: () {
+                          entertainedPersons.remove(persons);
+                          setState(() {});
+                        },
+                        icon: const Icon(Icons.close),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+      ],
+    );
+  }
+
   Widget _formInputFieldWidget() {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -170,12 +231,7 @@ class _EntertainmentReceiptScreenState
               labelText: language.entertainmentReceiptOccasion),
         ),
         16.height,
-        AppTextField(
-          textFieldType: TextFieldType.OTHER,
-          controller: personsController,
-          decoration:
-              inputDecoration(context, labelText: language.entertainedPersons),
-        ),
+        _personsInputFieldWidget(),
         16.height,
         AppTextField(
           textFieldType: TextFieldType.NUMBER,
@@ -187,23 +243,26 @@ class _EntertainmentReceiptScreenState
   }
 
   Widget uploadImage() {
-    return AppButton(
-      color: primaryColor,
-      textColor: Colors.white,
-      onTap: () {
+    return OutlinedButton(
+      onPressed: () {
         _showBottomSheet(context);
       },
+      style: ButtonStyle(
+        side: MaterialStateProperty.resolveWith((states) {
+          return const BorderSide(color: primaryColor);
+        }),
+      ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
           const Icon(
             Icons.add,
-            color: Colors.white,
+            color: primaryColor,
           ),
           4.width,
           Text(
-            language.uploadImage,
-            style: boldTextStyle(color: Colors.white),
+            selectedImage == null ? language.uploadImage : language.changeImage,
+            style: boldTextStyle(color: primaryColor),
           ),
         ],
       ),
@@ -214,18 +273,20 @@ class _EntertainmentReceiptScreenState
     return Stack(
       alignment: Alignment.topRight,
       children: [
-        Image.file(selectedImage!, height: 100), // Display the selected image
+        Container(
+          padding: const EdgeInsets.all(12),
+          child: Image.file(selectedImage!, height: 100),
+        ),
         Positioned(
-          right: -2,
-          top: -9,
           child: Container(
-            color: primaryColor,
+            padding: const EdgeInsets.all(4),
+            decoration: const BoxDecoration(
+                shape: BoxShape.circle, color: primaryColor),
             child: GestureDetector(
               child: const Icon(
                 Icons.close,
                 color: Colors.white,
               ),
-              // You can change the icon as needed
               onTap: () {
                 setState(() {
                   selectedImage = null; // Remove the selected image
