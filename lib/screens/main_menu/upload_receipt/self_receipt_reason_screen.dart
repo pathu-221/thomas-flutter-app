@@ -63,7 +63,7 @@ class _SelfReceiptReasonScreenState extends State<SelfReceiptReasonScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            language.receiptNumber,
+            language.selfReceiptReason,
             style: boldTextStyle(size: 28),
           ),
         ],
@@ -118,7 +118,7 @@ class _SelfReceiptReasonScreenState extends State<SelfReceiptReasonScreen> {
         iconTheme: const IconThemeData(color: Colors.white),
         backgroundColor: primaryColor,
         title: Text(
-          language.entertainmentReceipt,
+          language.selfReceiptReason,
           style: boldTextStyle(color: Colors.white),
         ),
       ),
@@ -127,7 +127,6 @@ class _SelfReceiptReasonScreenState extends State<SelfReceiptReasonScreen> {
         child: Form(
           key: formKey,
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               _titleWidget(),

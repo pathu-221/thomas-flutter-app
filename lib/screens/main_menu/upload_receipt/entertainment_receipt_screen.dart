@@ -59,7 +59,6 @@ class _EntertainmentReceiptScreenState
       "amount": amountCont.text.validate(),
     };
 
-
     HttpResponseModel? response = await uploadEntertainmenReceipt(
         selectedImage!, '/entertainment-receipt', request);
     if (response != null) {
@@ -158,7 +157,7 @@ class _EntertainmentReceiptScreenState
         ),
         16.height,
         AppTextField(
-          textFieldType: TextFieldType.OTHER,
+          textFieldType: TextFieldType.MULTILINE,
           controller: locationController,
           decoration: inputDecoration(context,
               labelText: language.entertainmentReceiptLocation),
@@ -255,7 +254,6 @@ class _EntertainmentReceiptScreenState
         child: Form(
           key: formKey,
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               _titleWidget(),

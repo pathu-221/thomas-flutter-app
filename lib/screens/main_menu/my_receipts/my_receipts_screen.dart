@@ -101,7 +101,11 @@ class _MyReceiptsScreenState extends State<MyReceiptsScreen> {
             backgroundColor: primaryColor,
             label: language.entertainmentReceipt,
             onTap: () {
-              const EntertainmentReceiptScreen().launch(context);
+              const EntertainmentReceiptScreen().launch(context).then((value) {
+                setState(() {
+                  loadMyReceipts();
+                });
+              });
             },
           ),
           SpeedDialChild(
@@ -112,7 +116,11 @@ class _MyReceiptsScreenState extends State<MyReceiptsScreen> {
             backgroundColor: Colors.green,
             label: language.selfReceiptReason,
             onTap: () {
-              const SelfReceiptReasonScreen().launch(context);
+              const SelfReceiptReasonScreen().launch(context).then((value) {
+                setState(() {
+                  loadMyReceipts();
+                });
+              });
             },
           ),
         ],
