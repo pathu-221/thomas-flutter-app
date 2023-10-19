@@ -14,7 +14,7 @@ class CustomSplashScreen extends StatelessWidget {
       if (appStore.isLoggedIn) {
         const MainMenuScreen().launch(context, isNewTask: true);
       } else {
-        const SignInScreen().launch(context);
+        const SignInScreen().launch(context, isNewTask: true);
       }
     }));
 
