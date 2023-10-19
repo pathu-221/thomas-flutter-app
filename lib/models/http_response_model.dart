@@ -9,7 +9,7 @@ class HttpResponseModel<T> {
     return HttpResponseModel(
       status: json['status'] as int?,
       msg: json['msg'] as String?,
-      data: json['data'] as T?,
+      data: json['data'] != null ? json['data'] as T? : null,
     );
   }
 }

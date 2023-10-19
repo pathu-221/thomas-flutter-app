@@ -136,4 +136,14 @@ class LanguageEn extends BaseLanguage {
 
   @override
   String get addAtleastOnePerson => "Add atleast one person";
+
+  @override
+  String get yes => "Yes";
+
+  @override
+  String get no => "No";
+
+  @override
+  String get areYouSureYouWantToPerformThisAction =>
+      "Are you sure you want to perform this action?";
 }

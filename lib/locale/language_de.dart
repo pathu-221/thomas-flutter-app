@@ -136,4 +136,14 @@ class LanguageDe extends BaseLanguage {
 
   @override
   String get addAtleastOnePerson => "Fügen Sie mindestens eine Person hinzu";
+
+  @override
+  String get yes => "Ja";
+
+  @override
+  String get no => "NEIN";
+
+  @override
+  String get areYouSureYouWantToPerformThisAction =>
+      "Sind Sie sicher, dass Sie diese Aktion ausführen möchten?";
 }

@@ -88,4 +88,10 @@ abstract class BaseLanguage {
   String get resetPasswordCaption;
 
   String get addAtleastOnePerson;
+
+  String get yes;
+
+  String get no;
+
+  String get areYouSureYouWantToPerformThisAction;
 }

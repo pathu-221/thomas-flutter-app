@@ -29,6 +29,20 @@ class _ProfileFragementState extends State<ProfileFragement>
     super.dispose();
   }
 
+  void _handleDeleteProfile() async {
+    showConfirmDialogCustom(
+      context,
+      onAccept: (value) async {
+        await deleteProfile();
+        SignInScreen().launch(context, isNewTask: true);
+      },
+      positiveText: language.yes,
+      negativeText: language.no,
+      title: language.areYouSureYouWantToPerformThisAction,
+      primaryColor: dangerColor,
+    );
+  }
+
   void _handleLogout() async {
     await logout();
     SignInScreen().launch(context, isNewTask: true);
@@ -75,7 +89,9 @@ class _ProfileFragementState extends State<ProfileFragement>
                           Icons.person_remove_rounded,
                         ),
                         title: language.deleteAccount,
-                        onTap: () {},
+                        onTap: () {
+                          _handleDeleteProfile();
+                        },
                       ),
                     ],
                   ),

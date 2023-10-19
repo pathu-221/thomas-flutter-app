@@ -64,12 +64,24 @@ Future<UserDataModel?> authenticate() async {
 
   HttpResponseModel responseData = HttpResponseModel.fromJson(jsonResponse);
 
+  if (responseData.status == 1) {
+    UserDataModel data = UserDataModel.fromJson(responseData.data);
+    return data;
+  }
+}
+
+Future<HttpResponseModel?> deleteProfile() async {
+  Response? response =
+      await requestWithToken('/user', method: HttpMethodType.DELETE);
+
+  final jsonResponse = jsonDecode(response.body);
+
+  HttpResponseModel responseData = HttpResponseModel.fromJson(jsonResponse);
+ 
   if (responseData.status != 1) {
     toast(responseData.msg);
     throw ErrorDescription(responseData.msg ?? "Something went wrong!");
   }
 
-  UserDataModel data = UserDataModel.fromJson(responseData.data);
-
-  return data;
+  return responseData;
 }

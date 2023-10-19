@@ -34,8 +34,12 @@ Future<Response> httpRequest(
           await http.put(url, body: jsonEncode(request), headers: header);
       break;
     case HttpMethodType.DELETE:
-      response =
-          await http.delete(url, body: jsonEncode(request), headers: header);
+      if (request != null) {
+        response =
+            await http.delete(url, body: jsonEncode(request), headers: header);
+      } else {
+        response = await http.delete(url, headers: header);
+      }
       break;
     default:
       response = await http.get(url, headers: headers);
