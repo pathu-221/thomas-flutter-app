@@ -2,10 +2,13 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hand_signature/signature.dart';
 import 'package:mobile_app/main.dart';
+import 'package:mobile_app/models/http_response_model.dart';
 import 'package:mobile_app/network/rest_apis/upload_files.dart';
 import 'package:mobile_app/utils/configs.dart';
+import 'package:mobile_app/widgets/loader_widget.dart';
 import 'package:path/path.dart';
 import 'package:nb_utils/nb_utils.dart';
 
@@ -32,12 +35,17 @@ class _SaveSignatureScreenState extends State<SaveSignatureScreen> {
     return tempFile;
   }
 
-  void submitSignature(ByteData byteData) async {
+  void submitSignature(ByteData byteData, BuildContext context) async {
+    appStore.setLoading(true);
     File signatureImage = await byteDataToFile(byteData);
-    String? response = await uploadFile(signatureImage, '/user/save-signature');
+    HttpResponseModel? response =
+        await uploadFile(signatureImage, '/user/save-signature');
 
-    if (response != null) {
-      toast('Image uploaded at $response');
+    appStore.setLoading(false);
+
+    if (response != null && response.status == 1) {
+      toast(response.msg);
+      finish(context);
     }
   }
 
@@ -52,54 +60,62 @@ class _SaveSignatureScreenState extends State<SaveSignatureScreen> {
         iconTheme: const IconThemeData(color: Colors.white),
         backgroundColor: primaryColor,
       ),
-      body: SingleChildScrollView(
-        child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container(
-                margin: const EdgeInsets.all(16),
-                decoration: boxDecorationWithRoundedCorners(
-                    border: Border.all(width: 1)),
-                width: context.width(),
-                height: context.height() / 2,
-                child: HandSignature(control: control),
-              ),
-              for (final signature in signatures)
-                Image.memory(Uint8List.view(signature.buffer)),
-              Container(
-                width: context.width(),
-                padding: const EdgeInsets.all(16),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: AppButton(
-                        onTap: () {
-                          control.clear();
-                          setState(() {});
-                        },
-                        text: language.reset,
-                      ),
+      body: Stack(
+        fit: StackFit.expand,
+        children: [
+          SingleChildScrollView(
+            child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    margin: const EdgeInsets.all(16),
+                    decoration: boxDecorationWithRoundedCorners(
+                        border: Border.all(width: 1)),
+                    width: context.width(),
+                    height: context.height() / 2,
+                    child: HandSignature(control: control),
+                  ),
+                  for (final signature in signatures)
+                    Image.memory(Uint8List.view(signature.buffer)),
+                  Container(
+                    width: context.width(),
+                    padding: const EdgeInsets.all(16),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: AppButton(
+                            onTap: () {
+                              control.clear();
+                              setState(() {});
+                            },
+                            text: language.reset,
+                          ),
+                        ),
+                        8.width,
+                        Expanded(
+                          child: AppButton(
+                            onTap: () async {
+                              final picture = await control.toImage(
+                                  background: Colors.white);
+                              if (picture != null) {
+                                submitSignature(picture, context);
+                              }
+                              setState(() {});
+                            },
+                            color: primaryColor,
+                            textColor: Colors.white,
+                            text: language.save,
+                          ),
+                        ),
+                      ],
                     ),
-                    8.width,
-                    Expanded(
-                      child: AppButton(
-                        onTap: () async {
-                          final picture =
-                              await control.toImage(background: Colors.white);
-                          if (picture != null) {
-                            submitSignature(picture);
-                          }
-                          setState(() {});
-                        },
-                        color: primaryColor,
-                        textColor: Colors.white,
-                        text: language.save,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ]),
+                  ),
+                ]),
+          ),
+          Observer(
+            builder: (_) => const LoaderWidget().visible(appStore.isLoading),
+          ),
+        ],
       ),
     );
   }

@@ -2,8 +2,6 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:mobile_app/network/network_utils.dart';
 import "package:path/path.dart";
-
-import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:mobile_app/models/http_response_model.dart';
 import 'package:mobile_app/utils/configs.dart';
@@ -41,7 +39,7 @@ Future<HttpResponseModel?> uploadEntertainmenReceipt(
     final responseParsed = HttpResponseModel.fromJson(jsonResponse);
 
     if (responseParsed.status != 1) {
-      throw ErrorDescription(responseParsed.msg ?? '');
+      return null;
     }
 
     return responseParsed;

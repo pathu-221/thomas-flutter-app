@@ -7,8 +7,10 @@ import 'package:mobile_app/models/http_response_model.dart';
 import 'package:mobile_app/network/rest_apis/upload_receipt.dart';
 import 'package:mobile_app/utils/common.dart';
 import 'package:mobile_app/utils/configs.dart';
+import 'package:mobile_app/widgets/loader_widget.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 
 class EntertainmentReceiptScreen extends StatefulWidget {
   const EntertainmentReceiptScreen({super.key});
@@ -69,8 +71,13 @@ class _EntertainmentReceiptScreenState
       "tipAmount": tipAmountCont.text.validate()
     };
 
+    appStore.setLoading(true);
+
     HttpResponseModel? response = await uploadEntertainmenReceipt(
         selectedImage!, '/entertainment-receipt', request);
+
+    appStore.setLoading(false);
+
     if (response != null) {
       toast(response.msg);
 
@@ -320,34 +327,42 @@ class _EntertainmentReceiptScreenState
           style: boldTextStyle(color: Colors.white),
         ),
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.only(bottom: 32),
-        child: Container(
-          padding: const EdgeInsets.all(16),
-          child: Form(
-            autovalidateMode: AutovalidateMode.onUserInteraction,
-            key: formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                _titleWidget(),
-                16.height,
-                uploadImage(),
-                if (selectedImage != null) ...[16.height, _imageWidget()],
-                16.height,
-                _formInputFieldWidget(),
-                16.height,
-                AppButton(
-                  width: context.width(),
-                  onTap: _handleSubmit,
-                  text: language.submit,
-                  color: primaryColor,
-                  textColor: Colors.white,
+      body: Stack(
+        fit: StackFit.expand,
+        children: [
+          SingleChildScrollView(
+            padding: const EdgeInsets.only(bottom: 32),
+            child: Container(
+              padding: const EdgeInsets.all(16),
+              child: Form(
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                key: formKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    _titleWidget(),
+                    16.height,
+                    uploadImage(),
+                    if (selectedImage != null) ...[16.height, _imageWidget()],
+                    16.height,
+                    _formInputFieldWidget(),
+                    16.height,
+                    AppButton(
+                      width: context.width(),
+                      onTap: _handleSubmit,
+                      text: language.submit,
+                      color: primaryColor,
+                      textColor: Colors.white,
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
           ),
-        ),
+          Observer(
+            builder: (_) => const LoaderWidget().visible(appStore.isLoading),
+          ),
+        ],
       ),
     );
   }

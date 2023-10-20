@@ -1,12 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobile_app/main.dart';
 import 'package:mobile_app/models/user_model.dart';
 import 'package:mobile_app/network/rest_apis/auth.dart';
 import 'package:mobile_app/utils/common.dart';
 import 'package:mobile_app/utils/configs.dart';
 import 'package:mobile_app/utils/images.dart';
+import 'package:mobile_app/widgets/loader_widget.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -33,7 +35,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
       "password": passwordCont.text
     };
 
+    appStore.setLoading(true);
     UserDataModel? responseData = await register(request);
+    appStore.setLoading(false);
+
     if (responseData != null) {
       toast('user registered successfully!');
       finish(context);
@@ -143,27 +148,35 @@ class _SignUpScreenState extends State<SignUpScreen> {
             statusBarIconBrightness: Brightness.light,
             statusBarColor: context.scaffoldBackgroundColor),
       ),
-      body: SizedBox(
-        child: Form(
-          key: formKey,
-          autovalidateMode: AutovalidateMode.onUserInteraction,
-          child: SingleChildScrollView(
-            padding: const EdgeInsets.all(16),
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                (context.height() * 0.05).toInt().height,
-                _buildTopWidget(),
-                _buildFormWidget(),
-                _forgotPasswordWidget(),
-                _loginButtonWidget(),
-                _signInWidget(),
-                30.height,
-              ],
+      body: Stack(
+        fit: StackFit.expand,
+        children: [
+          SingleChildScrollView(
+            child: Form(
+              key: formKey,
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    (context.height() * 0.05).toInt().height,
+                    _buildTopWidget(),
+                    _buildFormWidget(),
+                    _forgotPasswordWidget(),
+                    _loginButtonWidget(),
+                    _signInWidget(),
+                    30.height,
+                  ],
+                ),
+              ),
             ),
           ),
-        ),
+          Observer(
+            builder: (_) => const LoaderWidget().visible(appStore.isLoading),
+          ),
+        ],
       ),
     );
   }

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobile_app/main.dart';
 import 'package:mobile_app/models/http_response_model.dart';
 import 'package:mobile_app/network/rest_apis/upload_receipt.dart';
 import 'package:mobile_app/utils/common.dart';
 import 'package:mobile_app/utils/configs.dart';
+import 'package:mobile_app/widgets/loader_widget.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 class SelfReceiptReasonScreen extends StatefulWidget {
@@ -43,8 +45,9 @@ class _SelfReceiptReasonScreenState extends State<SelfReceiptReasonScreen> {
       "purpose": purposeCont.text.validate(),
       "reason": reasonCont.text.validate(),
     };
+    appStore.setLoading(true);
     HttpResponseModel? response = await uploadSelfReceipt(requestFields);
-
+    appStore.setLoading(false);
     if (response == null) {
       toast("Something went wrong!");
       return;
@@ -124,30 +127,38 @@ class _SelfReceiptReasonScreenState extends State<SelfReceiptReasonScreen> {
           style: boldTextStyle(color: Colors.white),
         ),
       ),
-      body: SingleChildScrollView(
-        child: Container(
-          padding: const EdgeInsets.all(16),
-          child: Form(
-            autovalidateMode: AutovalidateMode.onUserInteraction,
-            key: formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                _titleWidget(),
-                16.height,
-                _formInputFieldWidget(),
-                16.height,
-                AppButton(
-                  width: context.width(),
-                  onTap: _handleSubmit,
-                  text: language.submit,
-                  color: primaryColor,
-                  textColor: Colors.white,
+      body: Stack(
+        fit: StackFit.expand,
+        children: [
+          SingleChildScrollView(
+            child: Container(
+              padding: const EdgeInsets.all(16),
+              child: Form(
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                key: formKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    _titleWidget(),
+                    16.height,
+                    _formInputFieldWidget(),
+                    16.height,
+                    AppButton(
+                      width: context.width(),
+                      onTap: _handleSubmit,
+                      text: language.submit,
+                      color: primaryColor,
+                      textColor: Colors.white,
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
           ),
-        ),
+          Observer(
+            builder: (_) => const LoaderWidget().visible(appStore.isLoading),
+          ),
+        ],
       ),
     );
   }

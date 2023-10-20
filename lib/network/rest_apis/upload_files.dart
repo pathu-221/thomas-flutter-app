@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:flutter/widgets.dart';
 import 'package:http/http.dart';
 import 'package:mobile_app/models/http_response_model.dart';
 import 'package:mobile_app/utils/configs.dart';
@@ -9,7 +8,7 @@ import 'package:mobile_app/utils/constants.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:path/path.dart';
 
-Future<String?> uploadFile(File file, String endpoint) async {
+Future<HttpResponseModel?> uploadFile(File file, String endpoint) async {
   final Uri uri = Uri.parse('$BASE_URL$endpoint');
   final token = getStringAsync(AUTH_TOKEN);
 
@@ -35,10 +34,10 @@ Future<String?> uploadFile(File file, String endpoint) async {
     final responseParsed = HttpResponseModel.fromJson(jsonResponse);
 
     if (responseParsed.status != 1) {
-      throw ErrorDescription(responseParsed.msg ?? '');
+      return null;
     }
 
-    return responseParsed.data;
+    return responseParsed;
   } catch (e) {
     toast('$e');
     return null;

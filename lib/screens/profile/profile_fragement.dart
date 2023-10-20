@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobile_app/main.dart';
 import 'package:mobile_app/network/rest_apis/auth.dart';
 import 'package:mobile_app/screens/main_menu/save_signature/save_signature_screen.dart';
 import 'package:mobile_app/screens/sign_in_and_sign_up/sign_in_screen.dart';
 import 'package:mobile_app/utils/configs.dart';
+import 'package:mobile_app/widgets/loader_widget.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 class ProfileFragement extends StatefulWidget {
@@ -33,7 +35,9 @@ class _ProfileFragementState extends State<ProfileFragement>
     showConfirmDialogCustom(
       context,
       onAccept: (value) async {
+        appStore.setLoading(true);
         await deleteProfile();
+        appStore.setLoading(false);
         SignInScreen().launch(context, isNewTask: true);
       },
       positiveText: language.yes,
@@ -59,11 +63,14 @@ class _ProfileFragementState extends State<ProfileFragement>
           style: primaryTextStyle(size: 18, color: Colors.white),
         ),
       ),
-      body: AnimatedScrollView(
-          listAnimationType: ListAnimationType.FadeIn,
-          padding: const EdgeInsets.only(bottom: 32),
-          children: [
-            SettingSection(
+      body: Stack(
+        fit: StackFit.expand,
+        children: [
+          AnimatedScrollView(
+            listAnimationType: ListAnimationType.FadeIn,
+            padding: const EdgeInsets.only(bottom: 32),
+            children: [
+              SettingSection(
                 title: Text(language.general,
                     style: boldTextStyle(color: primaryColor)),
                 headingDecoration:
@@ -106,8 +113,15 @@ class _ProfileFragementState extends State<ProfileFragement>
                       },
                     ),
                   ),
-                ])
-          ]),
+                ],
+              ),
+            ],
+          ),
+          Observer(
+            builder: (_) => const LoaderWidget().visible(appStore.isLoading),
+          ),
+        ],
+      ),
     );
   }
 }

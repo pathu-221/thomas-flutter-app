@@ -57,6 +57,22 @@ mixin _$AppStore on _AppStore, Store {
     });
   }
 
+  late final _$isLoadingAtom =
+      Atom(name: '_AppStore.isLoading', context: context);
+
+  @override
+  bool get isLoading {
+    _$isLoadingAtom.reportRead();
+    return super.isLoading;
+  }
+
+  @override
+  set isLoading(bool value) {
+    _$isLoadingAtom.reportWrite(value, super.isLoading, () {
+      super.isLoading = value;
+    });
+  }
+
   late final _$_AppStoreActionController =
       ActionController(name: '_AppStore', context: context);
 
@@ -66,6 +82,17 @@ mixin _$AppStore on _AppStore, Store {
         name: '_AppStore.setUserFirstName');
     try {
       return super.setUserFirstName(val);
+    } finally {
+      _$_AppStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setLoading(bool val) {
+    final _$actionInfo =
+        _$_AppStoreActionController.startAction(name: '_AppStore.setLoading');
+    try {
+      return super.setLoading(val);
     } finally {
       _$_AppStoreActionController.endAction(_$actionInfo);
     }
@@ -98,7 +125,8 @@ mixin _$AppStore on _AppStore, Store {
     return '''
 userFirstName: ${userFirstName},
 userLastName: ${userLastName},
-isLoggedIn: ${isLoggedIn}
+isLoggedIn: ${isLoggedIn},
+isLoading: ${isLoading}
     ''';
   }
 }

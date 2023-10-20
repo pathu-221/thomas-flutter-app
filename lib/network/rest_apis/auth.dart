@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:mobile_app/main.dart';
 import 'package:mobile_app/models/http_response_model.dart';
@@ -19,7 +18,7 @@ Future<UserDataModel?> register(Map requestBody) async {
 
   if (responseData.status != 1) {
     toast(responseData.msg);
-    throw ErrorDescription(responseData.msg ?? "Something went wrong!");
+    return null;
   }
 
   UserDataModel data = UserDataModel.fromJson(responseData.data);
@@ -37,7 +36,7 @@ Future<UserDataModel?> login(Map requestBody) async {
 
   if (responseData.status != 1) {
     toast(responseData.msg);
-    throw ErrorDescription(responseData.msg ?? "Something went wrong!");
+    return null;
   }
 
   String token = responseData.data['token'];
@@ -81,7 +80,7 @@ Future<HttpResponseModel?> deleteProfile() async {
 
   if (responseData.status != 1) {
     toast(responseData.msg);
-    throw ErrorDescription(responseData.msg ?? "Something went wrong!");
+    return null;
   }
 
   return responseData;
