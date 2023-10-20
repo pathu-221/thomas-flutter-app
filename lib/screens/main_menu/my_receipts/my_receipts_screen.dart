@@ -1,9 +1,6 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:mobile_app/main.dart';
-import 'package:mobile_app/models/http_response_model.dart';
 import 'package:mobile_app/models/receipt_model.dart';
 import 'package:mobile_app/network/rest_apis/receipts.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
