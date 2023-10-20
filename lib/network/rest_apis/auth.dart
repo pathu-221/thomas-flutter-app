@@ -68,6 +68,7 @@ Future<UserDataModel?> authenticate() async {
     UserDataModel data = UserDataModel.fromJson(responseData.data);
     return data;
   }
+  return null;
 }
 
 Future<HttpResponseModel?> deleteProfile() async {
@@ -77,7 +78,7 @@ Future<HttpResponseModel?> deleteProfile() async {
   final jsonResponse = jsonDecode(response.body);
 
   HttpResponseModel responseData = HttpResponseModel.fromJson(jsonResponse);
- 
+
   if (responseData.status != 1) {
     toast(responseData.msg);
     throw ErrorDescription(responseData.msg ?? "Something went wrong!");

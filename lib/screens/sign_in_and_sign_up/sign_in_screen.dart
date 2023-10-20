@@ -25,6 +25,8 @@ class _SignInScreenState extends State<SignInScreen> {
   TextEditingController passCont = TextEditingController();
 
   void _loginUser() async {
+    if (!formKey.currentState!.validate()) return;
+
     Map request = {"email": emailCont.text, "password": passCont.text};
 
     UserDataModel? userData = await login(request);

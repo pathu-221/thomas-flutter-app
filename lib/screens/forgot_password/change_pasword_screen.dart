@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile_app/main.dart';
@@ -39,7 +37,6 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
       "otp": otpCont.text.toInt(),
       "password": passwordCont.text,
     };
-
 
     HttpResponseModel response = await updatePassword(requestBody);
 

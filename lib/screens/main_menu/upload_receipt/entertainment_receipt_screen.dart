@@ -58,6 +58,8 @@ class _EntertainmentReceiptScreenState
       return;
     }
 
+    if (!formKey.currentState!.validate()) return;
+
     Map<String, dynamic> request = {
       "cateringDate": pickedDate!.millisecondsSinceEpoch.toString(),
       "cateringAddress": locationController.text.validate(),
@@ -209,7 +211,7 @@ class _EntertainmentReceiptScreenState
           },
           child: AbsorbPointer(
             child: AppTextField(
-              textFieldType: TextFieldType.OTHER,
+              textFieldType: TextFieldType.NAME,
               controller: dateController,
               decoration: inputDecoration(
                 context,
@@ -227,7 +229,7 @@ class _EntertainmentReceiptScreenState
         ),
         16.height,
         AppTextField(
-          textFieldType: TextFieldType.OTHER,
+          textFieldType: TextFieldType.NAME,
           controller: occasionController,
           decoration: inputDecoration(context,
               labelText: language.entertainmentReceiptOccasion),
@@ -323,6 +325,7 @@ class _EntertainmentReceiptScreenState
         child: Container(
           padding: const EdgeInsets.all(16),
           child: Form(
+            autovalidateMode: AutovalidateMode.onUserInteraction,
             key: formKey,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,

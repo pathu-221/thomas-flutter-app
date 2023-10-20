@@ -34,6 +34,8 @@ class _SelfReceiptReasonScreenState extends State<SelfReceiptReasonScreen> {
   }
 
   void _handleSubmit() async {
+    if (!formKey.currentState!.validate()) return;
+
     Map requestFields = {
       "receiptNumber": receiptNumberCont.text.validate(),
       "amount": amountCont.text.toDouble().validate(),
@@ -90,20 +92,20 @@ class _SelfReceiptReasonScreenState extends State<SelfReceiptReasonScreen> {
         16.height,
         AppTextField(
           controller: recipientCont,
-          textFieldType: TextFieldType.OTHER,
+          textFieldType: TextFieldType.NAME,
           decoration: inputDecoration(context, labelText: language.recipient),
         ),
         16.height,
         AppTextField(
           controller: purposeCont,
-          textFieldType: TextFieldType.OTHER,
+          textFieldType: TextFieldType.NAME,
           decoration: inputDecoration(context,
               labelText: language.entertainmentPurpose),
         ),
         16.height,
         AppTextField(
           controller: reasonCont,
-          textFieldType: TextFieldType.OTHER,
+          textFieldType: TextFieldType.NAME,
           decoration:
               inputDecoration(context, labelText: language.selfReceiptReason),
         ),
@@ -122,25 +124,28 @@ class _SelfReceiptReasonScreenState extends State<SelfReceiptReasonScreen> {
           style: boldTextStyle(color: Colors.white),
         ),
       ),
-      body: Container(
-        padding: const EdgeInsets.all(16),
-        child: Form(
-          key: formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              _titleWidget(),
-              16.height,
-              _formInputFieldWidget(),
-              16.height,
-              AppButton(
-                width: context.width(),
-                onTap: _handleSubmit,
-                text: language.submit,
-                color: primaryColor,
-                textColor: Colors.white,
-              ),
-            ],
+      body: SingleChildScrollView(
+        child: Container(
+          padding: const EdgeInsets.all(16),
+          child: Form(
+            autovalidateMode: AutovalidateMode.onUserInteraction,
+            key: formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                _titleWidget(),
+                16.height,
+                _formInputFieldWidget(),
+                16.height,
+                AppButton(
+                  width: context.width(),
+                  onTap: _handleSubmit,
+                  text: language.submit,
+                  color: primaryColor,
+                  textColor: Colors.white,
+                ),
+              ],
+            ),
           ),
         ),
       ),

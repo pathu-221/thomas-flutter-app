@@ -24,6 +24,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
   TextEditingController passwordCont = TextEditingController();
 
   void _registerUser() async {
+    if (!formKey.currentState!.validate()) return;
+
     Map request = {
       "firstName": firstNameCont.text,
       "lastName": lastNameCont.text,
@@ -55,7 +57,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     return Column(
       children: [
         AppTextField(
-          textFieldType: TextFieldType.OTHER,
+          textFieldType: TextFieldType.NAME,
           controller: firstNameCont,
           decoration: inputDecoration(context,
               labelText: language.lblFirstName.capitalizeFirstLetter()),
@@ -63,7 +65,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         ),
         16.height,
         AppTextField(
-          textFieldType: TextFieldType.OTHER,
+          textFieldType: TextFieldType.NAME,
           controller: lastNameCont,
           decoration: inputDecoration(context,
               labelText: language.lblLastName.capitalizeFirstLetter()),
@@ -94,11 +96,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
         TextButton(
-            onPressed: () {},
-            child: Text(
-              language.forgotPassword,
-              style: boldTextStyle(color: primaryColor),
-            ))
+          onPressed: () {},
+          child: Text(
+            language.forgotPassword,
+            style: boldTextStyle(color: primaryColor),
+          ),
+        ),
       ],
     );
   }
@@ -118,13 +121,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
       Text(language.alreadyHaveAnAccount),
       16.width,
       TextButton(
-          onPressed: () {
-            finish(context);
-          },
-          child: Text(
-            language.login.capitalizeFirstLetter(),
-            style: boldTextStyle(color: primaryColor),
-          ))
+        onPressed: () {
+          finish(context);
+        },
+        child: Text(
+          language.login.capitalizeFirstLetter(),
+          style: boldTextStyle(color: primaryColor),
+        ),
+      ),
     ]);
   }
 
