@@ -14,9 +14,17 @@ abstract class _AppStore with Store {
   @observable
   bool isLoggedIn = false;
 
+  @observable
+  bool isLoading = false;
+
   @action
   void setUserFirstName(String val) {
     userFirstName = val;
+  }
+
+  @action
+  void setLoading(bool val) {
+    isLoading = val;
   }
 
   @action

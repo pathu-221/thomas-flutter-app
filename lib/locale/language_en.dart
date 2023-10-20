@@ -101,6 +101,9 @@ class LanguageEn extends BaseLanguage {
   String get amount => "Amount";
 
   @override
+  String get tipAmount => "Tip amount";
+
+  @override
   String get recipient => "Recipient";
 
   @override
@@ -146,4 +149,7 @@ class LanguageEn extends BaseLanguage {
   @override
   String get areYouSureYouWantToPerformThisAction =>
       "Are you sure you want to perform this action?";
+
+  @override
+  String get lblNoReceipts => "No receipts to show!";
 }

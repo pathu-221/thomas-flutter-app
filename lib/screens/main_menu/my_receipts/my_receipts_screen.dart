@@ -56,6 +56,25 @@ class _MyReceiptsScreenState extends State<MyReceiptsScreen> {
     );
   }
 
+  Widget _noDataWidge() {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Icon(
+            Icons.close_rounded,
+            size: 80,
+          ),
+          16.height,
+          Text(
+            language.lblNoReceipts.validate(),
+            style: secondaryTextStyle(size: 18),
+          )
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,10 +89,18 @@ class _MyReceiptsScreenState extends State<MyReceiptsScreen> {
       body: FutureBuilder<List<ReceiptModel>?>(
         future: loadMyReceipts(),
         builder: ((context, snapshot) {
-          if (snapshot.hasData && snapshot.data != null) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(
+              child: CircularProgressIndicator(
+                color: primaryColor,
+              ),
+            );
+          } else if (snapshot.hasData && snapshot.data != null) {
             return _buildReceiptsWidget(snapshot.data!);
+          } else if (snapshot.data == null) {
+            return _noDataWidge();
           } else if (snapshot.hasError) {
-            return Text(snapshot.error.toString());
+            return _noDataWidge();
           }
           return const Center(
             child: CircularProgressIndicator(

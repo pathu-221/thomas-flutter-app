@@ -65,6 +65,8 @@ abstract class BaseLanguage {
 
   String get amount;
 
+  String get tipAmount;
+
   String get recipient;
 
   String get entertainmentPurpose;
@@ -94,4 +96,6 @@ abstract class BaseLanguage {
   String get no;
 
   String get areYouSureYouWantToPerformThisAction;
+
+  String get lblNoReceipts;
 }

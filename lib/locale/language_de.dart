@@ -101,6 +101,9 @@ class LanguageDe extends BaseLanguage {
   String get amount => "Betrag";
 
   @override
+  String get tipAmount => "Trinkgeldbetrag";
+
+  @override
   String get recipient => "Empfänger";
 
   @override
@@ -146,4 +149,7 @@ class LanguageDe extends BaseLanguage {
   @override
   String get areYouSureYouWantToPerformThisAction =>
       "Sind Sie sicher, dass Sie diese Aktion ausführen möchten?";
+
+  @override
+  String get lblNoReceipts => "Keine Belege vorzeigbar!";
 }

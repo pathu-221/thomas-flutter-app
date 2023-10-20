@@ -27,6 +27,7 @@ class _EntertainmentReceiptScreenState
   final TextEditingController amountCont = TextEditingController();
   final TextEditingController occasionController = TextEditingController();
   final TextEditingController personsController = TextEditingController();
+  final TextEditingController tipAmountCont = TextEditingController();
   File? selectedImage;
   List<String> entertainedPersons = [];
 
@@ -63,6 +64,7 @@ class _EntertainmentReceiptScreenState
       "occassion": occasionController.text.validate(),
       "entertainedPersons": jsonEncode(entertainedPersons),
       "amount": amountCont.text.validate(),
+      "tipAmount": tipAmountCont.text.validate()
     };
 
     HttpResponseModel? response = await uploadEntertainmenReceipt(
@@ -238,6 +240,12 @@ class _EntertainmentReceiptScreenState
           controller: amountCont,
           decoration: inputDecoration(context, labelText: language.amount),
         ),
+        16.height,
+        AppTextField(
+          textFieldType: TextFieldType.NUMBER,
+          controller: tipAmountCont,
+          decoration: inputDecoration(context, labelText: language.tipAmount),
+        ),
       ],
     );
   }
@@ -310,28 +318,31 @@ class _EntertainmentReceiptScreenState
           style: boldTextStyle(color: Colors.white),
         ),
       ),
-      body: Container(
-        padding: const EdgeInsets.all(16),
-        child: Form(
-          key: formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              _titleWidget(),
-              16.height,
-              uploadImage(),
-              if (selectedImage != null) ...[16.height, _imageWidget()],
-              16.height,
-              _formInputFieldWidget(),
-              16.height,
-              AppButton(
-                width: context.width(),
-                onTap: _handleSubmit,
-                text: language.submit,
-                color: primaryColor,
-                textColor: Colors.white,
-              ),
-            ],
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.only(bottom: 32),
+        child: Container(
+          padding: const EdgeInsets.all(16),
+          child: Form(
+            key: formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                _titleWidget(),
+                16.height,
+                uploadImage(),
+                if (selectedImage != null) ...[16.height, _imageWidget()],
+                16.height,
+                _formInputFieldWidget(),
+                16.height,
+                AppButton(
+                  width: context.width(),
+                  onTap: _handleSubmit,
+                  text: language.submit,
+                  color: primaryColor,
+                  textColor: Colors.white,
+                ),
+              ],
+            ),
           ),
         ),
       ),
