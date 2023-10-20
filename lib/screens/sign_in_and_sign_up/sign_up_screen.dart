@@ -96,21 +96,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
   }
 
-  Widget _forgotPasswordWidget() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: [
-        TextButton(
-          onPressed: () {},
-          child: Text(
-            language.forgotPassword,
-            style: boldTextStyle(color: primaryColor),
-          ),
-        ),
-      ],
-    );
-  }
-
   Widget _loginButtonWidget() {
     return AppButton(
       color: primaryColor,
@@ -164,10 +149,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     (context.height() * 0.05).toInt().height,
                     _buildTopWidget(),
                     _buildFormWidget(),
-                    _forgotPasswordWidget(),
+                    16.height,
                     _loginButtonWidget(),
                     _signInWidget(),
-                    30.height,
                   ],
                 ),
               ),
