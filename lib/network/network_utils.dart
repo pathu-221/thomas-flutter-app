@@ -34,8 +34,12 @@ Future<Response> httpRequest(
           await http.put(url, body: jsonEncode(request), headers: header);
       break;
     case HttpMethodType.DELETE:
-      response =
-          await http.delete(url, body: jsonEncode(request), headers: header);
+      if (request != null) {
+        response =
+            await http.delete(url, body: jsonEncode(request), headers: header);
+      } else {
+        response = await http.delete(url, headers: header);
+      }
       break;
     default:
       response = await http.get(url, headers: headers);
@@ -51,9 +55,8 @@ Future<Response> requestWithToken(
   Map<String, String>? headers,
 }) async {
   String token = getStringAsync(AUTH_TOKEN);
-
   Map<String, String> header = {
-    HttpHeaders.authorizationHeader: "Bearer $token",
+    HttpHeaders.authorizationHeader: token.isNotEmpty ? "Bearer $token" : "",
   };
 
   if (headers != null) header.addAll(headers);

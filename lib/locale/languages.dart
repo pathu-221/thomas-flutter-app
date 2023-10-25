@@ -1,6 +1,8 @@
 abstract class BaseLanguage {
   String get login;
 
+  String get logout;
+
   String get emailLabel;
 
   String get passwordLabel;
@@ -63,6 +65,8 @@ abstract class BaseLanguage {
 
   String get amount;
 
+  String get tipAmount;
+
   String get recipient;
 
   String get entertainmentPurpose;
@@ -70,4 +74,28 @@ abstract class BaseLanguage {
   String get selfReceiptReason;
 
   String get uploadImage;
+
+  String get changeImage;
+
+  String get pleaseUploadImage;
+
+  String get profile;
+
+  String get general;
+
+  String get danger;
+
+  String get deleteAccount;
+
+  String get resetPasswordCaption;
+
+  String get addAtleastOnePerson;
+
+  String get yes;
+
+  String get no;
+
+  String get areYouSureYouWantToPerformThisAction;
+
+  String get lblNoReceipts;
 }

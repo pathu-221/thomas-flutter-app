@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_app/main.dart';
-import 'package:mobile_app/screens/main_menu/my_receips/my_receipts_screen.dart';
-import 'package:mobile_app/screens/main_menu/save_signature/save_signature_screen.dart';
-import 'package:mobile_app/screens/main_menu/upload_receipt/upload_receipt_screen.dart';
+import 'package:mobile_app/screens/contact/contact_fragment.dart';
+import 'package:mobile_app/screens/main_menu/my_receipts/my_receipts_screen.dart';
+import 'package:mobile_app/screens/profile/profile_fragement.dart';
 import 'package:mobile_app/utils/configs.dart';
-import 'package:nb_utils/nb_utils.dart';
 
 class MainMenuScreen extends StatefulWidget {
   const MainMenuScreen({super.key});
@@ -14,59 +13,48 @@ class MainMenuScreen extends StatefulWidget {
 }
 
 class _MainMenuScreenState extends State<MainMenuScreen> {
-  final List<String> items = [
-    language.uploadReceipt,
-    language.saveSignatureTitle,
-    language.myReceipts,
-    language.contact,
-  ];
+  int _selectedIndex = 0; // Selected index for the bottom navigation bar
 
-  final screens = [
-    const UploadReceiptScreen(),
-    const SaveSignatureScreen(),
+  final List<Widget> _screens = [
     const MyReceiptsScreen(),
-    null
+    const ContactFragement(),
+    const ProfileFragement(),
   ];
 
+  final List<BottomNavigationBarItem> _bottomNavigationBarItems = [
+    BottomNavigationBarItem(
+      icon: const Icon(Icons.receipt),
+      label: language.myReceipts,
+    ),
+    BottomNavigationBarItem(
+      icon: const Icon(Icons.contact_mail),
+      label: language.contact,
+    ),
+    BottomNavigationBarItem(
+      icon: const Icon(Icons.person),
+      label: language.profile,
+    ),
+    // const BottomNavigationBarItem(
+    //   icon: Icon(Icons.contact_phone),
+    //   label: 'Contact',
+    // ),
+  ];
+
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(language.lblMainMenu,
-            style: boldTextStyle(color: Colors.white)),
-        backgroundColor: primaryColor,
-      ),
-      body: Container(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            Expanded(
-              child: Center(
-                child: ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: items.length,
-                    itemBuilder: (context, index) {
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8.0),
-                        child: AppButton(
-                          color: primaryColor,
-                          text: items[index],
-                          textColor: Colors.white,
-                          onTap: () {
-                            if (screens[index] != null) {
-                              screens[index].launch(context);
-                            }
-                          },
-                        ),
-                      );
-                    }),
-              ),
-            )
-          ],
-        ),
+      body: _screens[_selectedIndex], // Display the selected screen
+      bottomNavigationBar: BottomNavigationBar(
+        items: _bottomNavigationBarItems,
+        currentIndex: _selectedIndex,
+        selectedItemColor: primaryColor, // Color for selected item
+        unselectedItemColor: Colors.grey,
+        onTap: (index) {
+          setState(() {
+            _selectedIndex = index; // Update the selected index
+          });
+        },
       ),
     );
   }

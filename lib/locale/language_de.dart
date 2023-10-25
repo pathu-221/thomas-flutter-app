@@ -5,6 +5,9 @@ class LanguageDe extends BaseLanguage {
   String get login => "Anmelden";
 
   @override
+  String get logout => "Ausloggen";
+
+  @override
   String get emailLabel => "Geben Sie Ihre E-Mail-Adresse ein";
 
   @override
@@ -98,6 +101,9 @@ class LanguageDe extends BaseLanguage {
   String get amount => "Betrag";
 
   @override
+  String get tipAmount => "Trinkgeldbetrag";
+
+  @override
   String get recipient => "Empfänger";
 
   @override
@@ -108,4 +114,42 @@ class LanguageDe extends BaseLanguage {
 
   @override
   String get uploadImage => "Bild hochladen";
+
+  @override
+  String get changeImage => "Bild ändern";
+
+  @override
+  String get pleaseUploadImage => "Bitte Bild hochladen";
+
+  @override
+  String get profile => "Profil";
+
+  @override
+  String get general => "Allgemein";
+
+  @override
+  String get danger => "Gefahr";
+
+  @override
+  String get deleteAccount => "Konto löschen";
+
+  @override
+  String get resetPasswordCaption =>
+      "Wir senden Ihnen einen Bestätigungscode per E-Mail";
+
+  @override
+  String get addAtleastOnePerson => "Fügen Sie mindestens eine Person hinzu";
+
+  @override
+  String get yes => "Ja";
+
+  @override
+  String get no => "NEIN";
+
+  @override
+  String get areYouSureYouWantToPerformThisAction =>
+      "Sind Sie sicher, dass Sie diese Aktion ausführen möchten?";
+
+  @override
+  String get lblNoReceipts => "Keine Belege vorzeigbar!";
 }
