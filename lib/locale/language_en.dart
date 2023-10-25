@@ -5,10 +5,13 @@ class LanguageEn extends BaseLanguage {
   String get login => "Login";
 
   @override
-  String get emailLabel => "Enter your email";
+  String get logout => "Logout";
 
   @override
-  String get passwordLabel => "Enter your password";
+  String get emailLabel => "Email";
+
+  @override
+  String get passwordLabel => "Password";
 
   @override
   String get forgotPassword => "Forgot Password";
@@ -26,10 +29,10 @@ class LanguageEn extends BaseLanguage {
   String get createAnAccount => "Create an account";
 
   @override
-  String get lblFirstName => "Enter your first name";
+  String get lblFirstName => "First name";
 
   @override
-  String get lblLastName => "Enter your last name";
+  String get lblLastName => "Fast name";
 
   @override
   String get lblMainMenu => "Main Menu";
@@ -53,10 +56,10 @@ class LanguageEn extends BaseLanguage {
   String get changePassword => "Change password";
 
   @override
-  String get confirmPasswordLabel => "Enter password again";
+  String get confirmPasswordLabel => "Re-enter password";
 
   @override
-  String get otpLabel => "Enter one time password";
+  String get otpLabel => "One Time Password ";
 
   @override
   String get passwordsDoNotMatch => "Passwords do not match!";
@@ -98,6 +101,9 @@ class LanguageEn extends BaseLanguage {
   String get amount => "Amount";
 
   @override
+  String get tipAmount => "Tip amount";
+
+  @override
   String get recipient => "Recipient";
 
   @override
@@ -108,4 +114,42 @@ class LanguageEn extends BaseLanguage {
 
   @override
   String get uploadImage => "Upload image";
+
+  @override
+  String get changeImage => "Change image";
+
+  @override
+  String get pleaseUploadImage => "Please upload image";
+
+  @override
+  String get profile => "Profile";
+
+  @override
+  String get general => "General";
+
+  @override
+  String get danger => "Danger";
+
+  @override
+  String get deleteAccount => "Delete account";
+
+  @override
+  String get resetPasswordCaption =>
+      "We will send a confirmation code to your email";
+
+  @override
+  String get addAtleastOnePerson => "Add atleast one person";
+
+  @override
+  String get yes => "Yes";
+
+  @override
+  String get no => "No";
+
+  @override
+  String get areYouSureYouWantToPerformThisAction =>
+      "Are you sure you want to perform this action?";
+
+  @override
+  String get lblNoReceipts => "No receipts to show!";
 }

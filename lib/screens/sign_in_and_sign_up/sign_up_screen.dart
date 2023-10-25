@@ -1,11 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobile_app/main.dart';
 import 'package:mobile_app/models/user_model.dart';
 import 'package:mobile_app/network/rest_apis/auth.dart';
 import 'package:mobile_app/utils/common.dart';
 import 'package:mobile_app/utils/configs.dart';
+import 'package:mobile_app/utils/images.dart';
+import 'package:mobile_app/widgets/loader_widget.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -23,6 +26,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
   TextEditingController passwordCont = TextEditingController();
 
   void _registerUser() async {
+    if (!formKey.currentState!.validate()) return;
+
     Map request = {
       "firstName": firstNameCont.text,
       "lastName": lastNameCont.text,
@@ -30,7 +35,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
       "password": passwordCont.text
     };
 
+    appStore.setLoading(true);
     UserDataModel? responseData = await register(request);
+    appStore.setLoading(false);
+
     if (responseData != null) {
       toast('user registered successfully!');
       finish(context);
@@ -38,14 +46,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   Widget _buildTopWidget() {
-    return Container(
-      child: Column(
-        children: [
-          Text(language.createAnAccount, style: boldTextStyle(size: 20))
-              .center(),
-          16.height,
-        ],
-      ),
+    return Column(
+      children: [
+        Container(
+          padding: const EdgeInsets.all(32),
+          child: Image.asset(app_logo),
+        ),
+        Text(language.createAnAccount, style: boldTextStyle(size: 20)).center(),
+        16.height,
+      ],
     );
   }
 
@@ -53,7 +62,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     return Column(
       children: [
         AppTextField(
-          textFieldType: TextFieldType.OTHER,
+          textFieldType: TextFieldType.NAME,
           controller: firstNameCont,
           decoration: inputDecoration(context,
               labelText: language.lblFirstName.capitalizeFirstLetter()),
@@ -61,7 +70,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         ),
         16.height,
         AppTextField(
-          textFieldType: TextFieldType.OTHER,
+          textFieldType: TextFieldType.NAME,
           controller: lastNameCont,
           decoration: inputDecoration(context,
               labelText: language.lblLastName.capitalizeFirstLetter()),
@@ -87,20 +96,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
   }
 
-  Widget _forgotPasswordWidget() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: [
-        TextButton(
-            onPressed: () {},
-            child: Text(
-              language.forgotPassword,
-              style: boldTextStyle(color: primaryColor),
-            ))
-      ],
-    );
-  }
-
   Widget _loginButtonWidget() {
     return AppButton(
       color: primaryColor,
@@ -116,13 +111,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
       Text(language.alreadyHaveAnAccount),
       16.width,
       TextButton(
-          onPressed: () {
-            finish(context);
-          },
-          child: Text(
-            language.login.capitalizeFirstLetter(),
-            style: boldTextStyle(color: primaryColor),
-          ))
+        onPressed: () {
+          finish(context);
+        },
+        child: Text(
+          language.login.capitalizeFirstLetter(),
+          style: boldTextStyle(color: primaryColor),
+        ),
+      ),
     ]);
   }
 
@@ -137,27 +133,34 @@ class _SignUpScreenState extends State<SignUpScreen> {
             statusBarIconBrightness: Brightness.light,
             statusBarColor: context.scaffoldBackgroundColor),
       ),
-      body: SizedBox(
-        child: Form(
-          key: formKey,
-          autovalidateMode: AutovalidateMode.onUserInteraction,
-          child: SingleChildScrollView(
-            padding: const EdgeInsets.all(16),
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                (context.height() * 0.05).toInt().height,
-                _buildTopWidget(),
-                _buildFormWidget(),
-                _forgotPasswordWidget(),
-                _loginButtonWidget(),
-                _signInWidget(),
-                30.height,
-              ],
+      body: Stack(
+        fit: StackFit.expand,
+        children: [
+          SingleChildScrollView(
+            child: Form(
+              key: formKey,
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    (context.height() * 0.05).toInt().height,
+                    _buildTopWidget(),
+                    _buildFormWidget(),
+                    16.height,
+                    _loginButtonWidget(),
+                    _signInWidget(),
+                  ],
+                ),
+              ),
             ),
           ),
-        ),
+          Observer(
+            builder: (_) => const LoaderWidget().visible(appStore.isLoading),
+          ),
+        ],
       ),
     );
   }

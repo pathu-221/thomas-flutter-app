@@ -4,7 +4,6 @@ import 'package:mobile_app/screens/main_menu/upload_receipt/entertainment_receip
 import 'package:mobile_app/screens/main_menu/upload_receipt/self_receipt_reason_screen.dart';
 import 'package:mobile_app/utils/configs.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:image_picker/image_picker.dart';
 
 class UploadReceiptScreen extends StatefulWidget {
   const UploadReceiptScreen({super.key});
@@ -37,7 +36,7 @@ class _UploadReceiptScreenState extends State<UploadReceiptScreen> {
                 textColor: Colors.white,
                 text: language.entertainmentReceipt,
                 onTap: () {
-                  EntertainmentReceiptScreen().launch(context);
+                  const EntertainmentReceiptScreen().launch(context);
                 },
               ),
               16.height,
@@ -48,7 +47,7 @@ class _UploadReceiptScreenState extends State<UploadReceiptScreen> {
                 text: language.selfReceiptReason,
                 onTap: () {
                   //_showBottomSheet(context);
-                  SelfReceiptReasonScreen().launch(context);  
+                  const SelfReceiptReasonScreen().launch(context);  
                 },
               ),
             ]),
