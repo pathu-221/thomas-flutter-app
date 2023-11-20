@@ -100,4 +100,6 @@ abstract class BaseLanguage {
   String get lblNoReceipts;
 
   String get sendOverMail;
+
+  String get emptyValueError;
 }

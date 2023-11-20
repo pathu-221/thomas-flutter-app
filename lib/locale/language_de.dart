@@ -17,6 +17,9 @@ class LanguageDe extends BaseLanguage {
   String get sendOverMail => "Per Post verschicken";
 
   @override
+  String get emptyValueError => "Der Wert darf nicht leer sein!";
+
+  @override
   String get forgotPassword => "Passwort vergessen";
 
   @override

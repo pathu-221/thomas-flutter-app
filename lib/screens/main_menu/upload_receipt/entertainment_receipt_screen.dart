@@ -169,7 +169,7 @@ class _EntertainmentReceiptScreenState
             color: primaryColor,
             onPressed: () {
               if (personsController.text.isEmpty) {
-                toast(language.addAtleastOnePerson);
+                toast(language.emptyValueError);
                 return;
               }
               entertainedPersons.add(personsController.text);
