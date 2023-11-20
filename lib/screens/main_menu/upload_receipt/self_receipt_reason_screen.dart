@@ -134,7 +134,6 @@ class _SelfReceiptReasonScreenState extends State<SelfReceiptReasonScreen> {
             child: Container(
               padding: const EdgeInsets.all(16),
               child: Form(
-                autovalidateMode: AutovalidateMode.onUserInteraction,
                 key: formKey,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,

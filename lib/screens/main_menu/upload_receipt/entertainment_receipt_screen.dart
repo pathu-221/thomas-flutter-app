@@ -74,7 +74,11 @@ class _EntertainmentReceiptScreenState
     appStore.setLoading(true);
 
     HttpResponseModel? response = await uploadEntertainmenReceipt(
-        selectedImage!, '/entertainment-receipt', request);
+            selectedImage!, '/entertainment-receipt', request)
+        .catchError((error) {
+      toast('Something went wrong!');
+      return null;
+    });
 
     appStore.setLoading(false);
 
@@ -164,7 +168,10 @@ class _EntertainmentReceiptScreenState
           suffix: IconButton(
             color: primaryColor,
             onPressed: () {
-              if (personsController.text.isEmpty) return;
+              if (personsController.text.isEmpty) {
+                toast(language.addAtleastOnePerson);
+                return;
+              }
               entertainedPersons.add(personsController.text);
               personsController.text = '';
               setState(() {});
@@ -335,7 +342,6 @@ class _EntertainmentReceiptScreenState
             child: Container(
               padding: const EdgeInsets.all(16),
               child: Form(
-                autovalidateMode: AutovalidateMode.onUserInteraction,
                 key: formKey,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
