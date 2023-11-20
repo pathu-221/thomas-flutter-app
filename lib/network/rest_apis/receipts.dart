@@ -28,7 +28,7 @@ Future<List<ReceiptModel>?> getMyReceipts() async {
 Future<HttpResponseModel?> getEntertainmentReceiptByMail(
     String receiptId) async {
   final response = await requestWithToken(
-      '/entertainment-receipt/send-mail/$receiptId',
+      '/entertainment-receipt/$receiptId/send-mail',
       method: HttpMethodType.GET);
 
   final jsonResponse = jsonDecode(response.body);
@@ -42,7 +42,7 @@ Future<HttpResponseModel?> getEntertainmentReceiptByMail(
 }
 
 Future<HttpResponseModel?> getSelfReceiptByMail(String receiptId) async {
-  final response = await requestWithToken('/self-receipt/send-mail/$receiptId',
+  final response = await requestWithToken('/self-receipt/$receiptId/send-mail',
       method: HttpMethodType.GET);
 
   final jsonResponse = jsonDecode(response.body);
