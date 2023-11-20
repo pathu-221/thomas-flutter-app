@@ -3,6 +3,8 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:intl/intl.dart';
 import 'package:mobile_app/main.dart';
 import 'package:mobile_app/models/entertainment_receipt_model.dart';
+import 'package:mobile_app/models/http_response_model.dart';
+import 'package:mobile_app/network/rest_apis/receipts.dart';
 import 'package:mobile_app/utils/configs.dart';
 import 'package:mobile_app/utils/constants.dart';
 import 'package:mobile_app/widgets/loader_widget.dart';
@@ -11,6 +13,15 @@ import 'package:nb_utils/nb_utils.dart';
 class EntertainmentReceiptView extends StatelessWidget {
   final EntertainmentReceiptModel receipt;
   const EntertainmentReceiptView({super.key, required this.receipt});
+
+  void _getReceiptByMail() async {
+    appStore.setLoading(true);
+    HttpResponseModel? response =
+        await getEntertainmentReceiptByMail(receipt.id);
+
+    appStore.setLoading(false);
+    toast(response?.msg ?? "");
+  }
 
   Widget _headingWidget(BuildContext context) {
     String formattedDate =
@@ -198,7 +209,9 @@ class EntertainmentReceiptView extends StatelessWidget {
               width: double.infinity,
               color: primaryColor,
               textColor: Colors.white,
-              onTap: () {},
+              onTap: () {
+                _getReceiptByMail();
+              },
               text: language.sendOverMail,
             ),
           ),

@@ -24,3 +24,33 @@ Future<List<ReceiptModel>?> getMyReceipts() async {
 
   return data;
 }
+
+Future<HttpResponseModel?> getEntertainmentReceiptByMail(
+    String receiptId) async {
+  final response = await requestWithToken(
+      '/entertainment-receipt/send-mail/$receiptId',
+      method: HttpMethodType.GET);
+
+  final jsonResponse = jsonDecode(response.body);
+
+  HttpResponseModel httpResponse = HttpResponseModel.fromJson(jsonResponse);
+  if (httpResponse.status != 1) {
+    toast(httpResponse.msg);
+    return null;
+  }
+  return httpResponse;
+}
+
+Future<HttpResponseModel?> getSelfReceiptByMail(String receiptId) async {
+  final response = await requestWithToken('/self-receipt/send-mail/$receiptId',
+      method: HttpMethodType.GET);
+
+  final jsonResponse = jsonDecode(response.body);
+
+  HttpResponseModel httpResponse = HttpResponseModel.fromJson(jsonResponse);
+  if (httpResponse.status != 1) {
+    toast(httpResponse.msg);
+    return null;
+  }
+  return httpResponse;
+}
