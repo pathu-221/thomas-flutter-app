@@ -102,6 +102,10 @@ class EntertainmentReceiptView extends StatelessWidget {
 
   Widget _buildImagePreview(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        iconTheme: const IconThemeData(color: Colors.white),
+        backgroundColor: Colors.black,
+      ),
       backgroundColor: Colors.black,
       body: Center(
         child: Image.network(
@@ -122,28 +126,36 @@ class EntertainmentReceiptView extends StatelessWidget {
           style: boldTextStyle(),
         ),
         8.height,
-        for (String person in receipt.entertainedPersons) ...[
-          Container(
-            padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              color: context.cardColor,
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: Row(
-              children: [
-                Text(
-                  person,
-                  style: primaryTextStyle(),
+        Container(
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: context.cardColor,
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: Column(
+            children: [
+              for (int i = 0; i < receipt.entertainedPersons.length; i++) ...[
+                Row(
+                  children: [
+                    Text(
+                      receipt.entertainedPersons[i],
+                      style: primaryTextStyle(),
+                    ),
+                  ],
                 ),
-                Divider(
-                  color: context.dividerColor,
-                  indent: 0,
-                  height: 1,
-                ).opacity(opacity: .3),
-              ],
-            ),
-          )
-        ]
+                if (i < receipt.entertainedPersons.length - 1)
+                  Container(
+                    padding: const EdgeInsets.symmetric(vertical: 8),
+                    child: Divider(
+                      color: context.dividerColor,
+                      indent: 0,
+                      height: 1,
+                    ).opacity(opacity: .3),
+                  ),
+              ]
+            ],
+          ),
+        )
       ],
     );
   }

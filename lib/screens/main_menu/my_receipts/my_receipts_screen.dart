@@ -106,9 +106,11 @@ class _MyReceiptsScreenState extends State<MyReceiptsScreen> {
                 color: primaryColor,
               ),
             );
-          } else if (snapshot.hasData && snapshot.data != null) {
+          } else if (snapshot.hasData &&
+              snapshot.data != null &&
+              snapshot.data!.isNotEmpty) {
             return _buildReceiptsWidget(snapshot.data!);
-          } else if (snapshot.data == null) {
+          } else if (snapshot.data == null || snapshot.data!.isEmpty) {
             return _noDataWidge();
           } else if (snapshot.hasError) {
             return _noDataWidge();
