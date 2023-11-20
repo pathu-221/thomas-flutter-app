@@ -14,6 +14,9 @@ class LanguageDe extends BaseLanguage {
   String get passwordLabel => "Passwort";
 
   @override
+  String get sendOverMail => "Per Post verschicken";
+
+  @override
   String get forgotPassword => "Passwort vergessen";
 
   @override

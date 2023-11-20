@@ -104,6 +104,9 @@ class LanguageEn extends BaseLanguage {
   String get tipAmount => "Tip amount";
 
   @override
+  String get sendOverMail => "Send over mail";
+
+  @override
   String get recipient => "Recipient";
 
   @override

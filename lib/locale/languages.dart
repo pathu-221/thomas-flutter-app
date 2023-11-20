@@ -98,4 +98,6 @@ abstract class BaseLanguage {
   String get areYouSureYouWantToPerformThisAction;
 
   String get lblNoReceipts;
+
+  String get sendOverMail;
 }

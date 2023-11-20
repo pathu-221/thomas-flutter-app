@@ -4,8 +4,10 @@ import 'package:mobile_app/main.dart';
 import 'package:mobile_app/models/receipt_model.dart';
 import 'package:mobile_app/network/rest_apis/receipts.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:mobile_app/screens/entertainment_receipt/enertainment_receipt_view.dart';
 import 'package:mobile_app/screens/main_menu/upload_receipt/entertainment_receipt_screen.dart';
 import 'package:mobile_app/screens/main_menu/upload_receipt/self_receipt_reason_screen.dart';
+import 'package:mobile_app/screens/self_receipt_reason/self_receipt_reason_view.dart';
 import 'package:mobile_app/utils/configs.dart';
 import 'package:nb_utils/nb_utils.dart';
 
@@ -34,7 +36,19 @@ class _MyReceiptsScreenState extends State<MyReceiptsScreen> {
         String formattedDate =
             DateFormat('dd-MMM-yyyy', 'en_US').format(item.createdAt);
         return SettingItemWidget(
-          onTap: () {},
+          onTap: () {
+            if (item.entertainmentReceiptId == null &&
+                item.selfReceiptId != null) {
+              SelfReceiptReasonView(
+                receipt: item.selfReceipt!,
+              ).launch(context);
+            } else if (item.selfReceiptId == null &&
+                item.entertainmentReceiptId != null) {
+              EntertainmentReceiptView(
+                receipt: item.entertainmentReceipt!,
+              ).launch(context);
+            }
+          },
           title: item.entertainmentReceiptId == null
               ? item.selfReceipt!.purpose.validate()
               : item.entertainmentReceipt!.occasion.validate(),
