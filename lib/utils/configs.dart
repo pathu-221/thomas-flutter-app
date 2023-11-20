@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+const CURRENCY_SYMBOL = "€";
 const BASE_URL =
     'http://192.168.1.37:3008'; //'https://thomasklitzke-api.unitedspaces.org';
 const DEFAULT_LANGUAGE = 'en';

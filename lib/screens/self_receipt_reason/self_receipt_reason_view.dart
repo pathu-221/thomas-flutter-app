@@ -41,7 +41,7 @@ class SelfReceiptReasonView extends StatelessWidget {
         8.width,
         Center(
           child: Text(
-            receipt.amount.validate().toString(),
+            '$CURRENCY_SYMBOL${receipt.amount.validate().toString()}',
             style: boldTextStyle(size: LABEL_TEXT_SIZE),
           ),
         )
@@ -124,7 +124,7 @@ class SelfReceiptReasonView extends StatelessWidget {
         iconTheme: const IconThemeData(color: Colors.white),
         backgroundColor: primaryColor,
         title: Text(
-          language.entertainmentReceipt,
+          language.selfReceiptReason,
           style: boldTextStyle(color: Colors.white),
         ),
       ),

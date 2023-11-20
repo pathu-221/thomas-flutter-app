@@ -81,7 +81,7 @@ class EntertainmentReceiptView extends StatelessWidget {
                 children: [
                   Text(language.amount),
                   Text(
-                    receipt.amount.validate().toString(),
+                    '$CURRENCY_SYMBOL${receipt.amount.validate().toString()}',
                     style: boldTextStyle(),
                   )
                 ],
@@ -99,7 +99,7 @@ class EntertainmentReceiptView extends StatelessWidget {
                 children: [
                   Text(language.tipAmount),
                   Text(
-                    receipt.tipAmount.validate().toString(),
+                    '$CURRENCY_SYMBOL${receipt.tipAmount.validate().toString()}',
                     style: boldTextStyle(),
                   )
                 ],
