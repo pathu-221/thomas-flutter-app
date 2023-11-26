@@ -32,7 +32,7 @@ class LanguageEn extends BaseLanguage {
   String get lblFirstName => "First name";
 
   @override
-  String get lblLastName => "Fast name";
+  String get lblLastName => "Last name";
 
   @override
   String get lblMainMenu => "Main Menu";
