@@ -141,7 +141,6 @@ class _SignInScreenState extends State<SignInScreen> {
           SingleChildScrollView(
             child: Form(
               key: formKey,
-              autovalidateMode: AutovalidateMode.onUserInteraction,
               child: SingleChildScrollView(
                 padding: const EdgeInsets.all(16),
                 child: Column(

@@ -139,7 +139,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
           SingleChildScrollView(
             child: Form(
               key: formKey,
-              autovalidateMode: AutovalidateMode.onUserInteraction,
               child: SingleChildScrollView(
                 padding: const EdgeInsets.all(16),
                 child: Column(

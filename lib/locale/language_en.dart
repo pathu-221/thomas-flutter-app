@@ -104,6 +104,12 @@ class LanguageEn extends BaseLanguage {
   String get tipAmount => "Tip amount";
 
   @override
+  String get sendOverMail => "Send over mail";
+
+  @override
+  String get emptyValueError => "Value cannot be empty!";
+
+  @override
   String get recipient => "Recipient";
 
   @override

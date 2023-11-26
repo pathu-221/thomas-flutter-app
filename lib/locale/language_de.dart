@@ -8,10 +8,16 @@ class LanguageDe extends BaseLanguage {
   String get logout => "Ausloggen";
 
   @override
-  String get emailLabel => "Geben Sie Ihre E-Mail-Adresse ein";
+  String get emailLabel => "E-Mail";
 
   @override
-  String get passwordLabel => "Geben Sie Ihr Passwort ein";
+  String get passwordLabel => "Passwort";
+
+  @override
+  String get sendOverMail => "Per Post verschicken";
+
+  @override
+  String get emptyValueError => "Der Wert darf nicht leer sein!";
 
   @override
   String get forgotPassword => "Passwort vergessen";

@@ -7,6 +7,7 @@ class EntertainmentReceiptModel {
   String occasion;
   List<String> entertainedPersons;
   double amount;
+  double tipAmount;
   DateTime createdAt;
   DateTime updatedAt;
   DateTime? deletedAt;
@@ -20,6 +21,7 @@ class EntertainmentReceiptModel {
     required this.entertainedPersons,
     required this.createdAt,
     required this.updatedAt,
+    required this.tipAmount,
     this.deletedAt,
   });
 
@@ -32,6 +34,7 @@ class EntertainmentReceiptModel {
       entertainedPersons:
           List<String>.from(jsonDecode(json['entertainedPersons'])),
       amount: json['amount']?.toDouble() ?? 0.0,
+      tipAmount: json['tipAmount']?.toDouble() ?? 0.0,
       createdAt: DateTime.parse(json['createdAt']),
       updatedAt: DateTime.parse(json['updatedAt']),
     );

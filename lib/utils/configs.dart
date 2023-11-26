@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
+const CURRENCY_SYMBOL = "€";
 const BASE_URL =
-    'https://thomasklitzke-api.unitedspaces.org'; // 'http://192.168.0.111:3008';
+    'http://192.168.1.37:3008'; //'https://thomasklitzke-api.unitedspaces.org';
 const DEFAULT_LANGUAGE = 'en';
 const FACEBOOK_URL = 'https://www.facebook.com/thomas.klitzke.steuerberater/';
 const INSTAGRAM_URL =
