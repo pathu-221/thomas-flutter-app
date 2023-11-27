@@ -12,11 +12,11 @@ class CustomSplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     4.seconds.delay.then(((value) {
-      // if (appStore.isLoggedIn) {
-      //   const MainMenuScreen().launch(context, isNewTask: true);
-      // } else {
-      //   const SignInScreen().launch(context, isNewTask: true);
-      // }
+      if (appStore.isLoggedIn) {
+        const MainMenuScreen().launch(context, isNewTask: true);
+      } else {
+        const SignInScreen().launch(context, isNewTask: true);
+      }
     }));
 
     return Stack(
