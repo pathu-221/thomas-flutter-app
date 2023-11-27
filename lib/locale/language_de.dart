@@ -15,7 +15,7 @@ class LanguageDe extends BaseLanguage {
 
   @override
   String get missingSignatureSubtitle =>
-      "Bitte fügen Sie Ihre Signatur aus den Einstellungen hinzu";
+      "Bitte fügen Sie Ihre Signatur aus dem Profil hinzu";
 
   @override
   String get passwordLabel => "Passwort";

@@ -111,7 +111,7 @@ class LanguageEn extends BaseLanguage {
 
   @override
   String get missingSignatureSubtitle =>
-      "Please add your signature from the settings";
+      "Please add your signature from the profile";
 
   @override
   String get emptyValueError => "Value cannot be empty!";
