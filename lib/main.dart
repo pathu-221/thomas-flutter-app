@@ -20,7 +20,9 @@ void main() async {
 
   String? token = getStringAsync(AUTH_TOKEN);
   if (token.isNotEmpty) {
-    UserDataModel? userData = await authenticate();
+    UserDataModel? userData = await authenticate().catchError((onError) {
+      //
+    });
 
     if (userData != null) {
       appStore.setIsLoggedIn(true);

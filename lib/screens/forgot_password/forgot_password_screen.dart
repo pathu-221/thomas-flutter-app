@@ -82,7 +82,6 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                 _topWidget(),
                 Form(
                   key: formkey,
-                  autovalidateMode: AutovalidateMode.onUserInteraction,
                   child: Container(
                     padding:
                         const EdgeInsets.only(top: 20, left: 16, right: 16),

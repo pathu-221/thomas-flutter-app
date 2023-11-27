@@ -38,13 +38,10 @@ Future<HttpResponseModel?> uploadEntertainmenReceipt(
     final jsonResponse = jsonDecode(responseData);
     final responseParsed = HttpResponseModel.fromJson(jsonResponse);
 
-    if (responseParsed.status != 1) {
-      return null;
-    }
-
     return responseParsed;
   } catch (e) {
     toast('$e');
+    log(e.toString());
     return null;
   }
 }

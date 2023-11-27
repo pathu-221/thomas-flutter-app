@@ -11,6 +11,13 @@ class LanguageDe extends BaseLanguage {
   String get emailLabel => "E-Mail";
 
   @override
+  String get missingSignature => "Fehlende Signatur";
+
+  @override
+  String get missingSignatureSubtitle =>
+      "Bitte fügen Sie Ihre Signatur aus dem Profil hinzu";
+
+  @override
   String get passwordLabel => "Passwort";
 
   @override

@@ -107,6 +107,13 @@ class LanguageEn extends BaseLanguage {
   String get sendOverMail => "Send over mail";
 
   @override
+  String get missingSignature => "Missing signature";
+
+  @override
+  String get missingSignatureSubtitle =>
+      "Please add your signature from the profile";
+
+  @override
   String get emptyValueError => "Value cannot be empty!";
 
   @override
