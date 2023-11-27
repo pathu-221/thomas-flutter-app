@@ -1,7 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:mobile_app/main.dart';
+import 'package:mobile_app/models/config_model.dart';
 import 'package:mobile_app/models/receipt_model.dart';
+import 'package:mobile_app/network/rest_apis/config_apis.dart';
 import 'package:mobile_app/network/rest_apis/receipts.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:mobile_app/screens/entertainment_receipt/enertainment_receipt_view.dart';
@@ -20,9 +24,25 @@ class MyReceiptsScreen extends StatefulWidget {
 
 class _MyReceiptsScreenState extends State<MyReceiptsScreen> {
   ValueNotifier<bool> isDialOpen = ValueNotifier(false);
+  bool? isSignaturExist;
+
+  @override
+  void initState() {
+    super.initState();
+    loadConfig();
+  }
 
   Future<List<ReceiptModel>?> loadMyReceipts() async {
     return getMyReceipts();
+  }
+
+  void loadConfig() async {
+    ConfigModel? data = await getConfig();
+    if (data != null) {
+      setState(() {
+        isSignaturExist = data.signatureExist;
+      });
+    }
   }
 
   Widget _buildReceiptsWidget(List<ReceiptModel> receipts) {
@@ -86,6 +106,30 @@ class _MyReceiptsScreenState extends State<MyReceiptsScreen> {
     );
   }
 
+  Widget _buildStickyAlertWidget(BuildContext context) {
+    return Container(
+      width: context.width(),
+      decoration: BoxDecoration(
+        color: dangerColor.withOpacity(0.2),
+      ),
+      padding: const EdgeInsets.all(16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            language.missingSignature,
+            style: boldTextStyle(color: dangerColor),
+          ),
+          // 8.height,
+          Text(
+            language.missingSignatureSubtitle,
+            style: secondaryTextStyle(color: dangerColor),
+          )
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -97,30 +141,38 @@ class _MyReceiptsScreenState extends State<MyReceiptsScreen> {
         iconTheme: const IconThemeData(color: Colors.white),
         backgroundColor: primaryColor,
       ),
-      body: FutureBuilder<List<ReceiptModel>?>(
-        future: loadMyReceipts(),
-        builder: ((context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(
-              child: CircularProgressIndicator(
-                color: primaryColor,
-              ),
-            );
-          } else if (snapshot.hasData &&
-              snapshot.data != null &&
-              snapshot.data!.isNotEmpty) {
-            return _buildReceiptsWidget(snapshot.data!);
-          } else if (snapshot.data == null || snapshot.data!.isEmpty) {
-            return _noDataWidge();
-          } else if (snapshot.hasError) {
-            return _noDataWidge();
-          }
-          return const Center(
-            child: CircularProgressIndicator(
-              color: primaryColor,
+      body: Column(
+        children: [
+          if (isSignaturExist != null && isSignaturExist == false)
+            _buildStickyAlertWidget(context),
+          Expanded(
+            child: FutureBuilder<List<ReceiptModel>?>(
+              future: loadMyReceipts(),
+              builder: ((context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(
+                    child: CircularProgressIndicator(
+                      color: primaryColor,
+                    ),
+                  );
+                } else if (snapshot.hasData &&
+                    snapshot.data != null &&
+                    snapshot.data!.isNotEmpty) {
+                  return _buildReceiptsWidget(snapshot.data!);
+                } else if (snapshot.data == null || snapshot.data!.isEmpty) {
+                  return _noDataWidge();
+                } else if (snapshot.hasError) {
+                  return _noDataWidge();
+                }
+                return const Center(
+                  child: CircularProgressIndicator(
+                    color: primaryColor,
+                  ),
+                );
+              }),
             ),
-          );
-        }),
+          ),
+        ],
       ),
       floatingActionButton: SpeedDial(
         openCloseDial: isDialOpen,

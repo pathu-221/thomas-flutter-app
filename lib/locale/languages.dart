@@ -102,4 +102,8 @@ abstract class BaseLanguage {
   String get sendOverMail;
 
   String get emptyValueError;
+
+  String get missingSignature;
+
+  String get missingSignatureSubtitle;
 }
