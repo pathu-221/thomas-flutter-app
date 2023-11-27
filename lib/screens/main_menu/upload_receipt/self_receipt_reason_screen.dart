@@ -90,7 +90,8 @@ class _SelfReceiptReasonScreenState extends State<SelfReceiptReasonScreen> {
         AppTextField(
           controller: amountCont,
           textFieldType: TextFieldType.NUMBER,
-          decoration: inputDecoration(context, labelText: language.amount),
+          decoration: inputDecoration(context,
+              labelText: "${language.amount} ($CURRENCY_SYMBOL)"),
         ),
         16.height,
         AppTextField(

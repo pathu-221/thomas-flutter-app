@@ -254,13 +254,15 @@ class _EntertainmentReceiptScreenState
         AppTextField(
           textFieldType: TextFieldType.NUMBER,
           controller: amountCont,
-          decoration: inputDecoration(context, labelText: language.amount),
+          decoration: inputDecoration(context,
+              labelText: "${language.amount} ($CURRENCY_SYMBOL)"),
         ),
         16.height,
         AppTextField(
           textFieldType: TextFieldType.NUMBER,
           controller: tipAmountCont,
-          decoration: inputDecoration(context, labelText: language.tipAmount),
+          decoration: inputDecoration(context,
+              labelText: "${language.tipAmount} ($CURRENCY_SYMBOL)"),
         ),
       ],
     );
