@@ -106,4 +106,18 @@ abstract class BaseLanguage {
   String get missingSignature;
 
   String get missingSignatureSubtitle;
+
+  String get addAddress;
+
+  String get lbladdressLine1;
+
+  String get lbladdressLine2;
+
+  String get lblcountry;
+
+  String get lblstate;
+
+  String get lblpincode;
+
+  String get lblcompanyName;
 }

@@ -165,4 +165,25 @@ class LanguageEn extends BaseLanguage {
 
   @override
   String get lblNoReceipts => "No receipts to show!";
+
+  @override
+  String get addAddress => "Add address";
+
+  @override
+  String get lbladdressLine1 => "Address line 1";
+
+  @override
+  String get lbladdressLine2 => "Address line 2";
+
+  @override
+  String get lblcountry => "Country";
+
+  @override
+  String get lblstate => "State";
+
+  @override
+  String get lblpincode => "Pincode";
+
+  @override
+  String get lblcompanyName => "Company name";
 }

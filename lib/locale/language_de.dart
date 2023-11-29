@@ -165,4 +165,24 @@ class LanguageDe extends BaseLanguage {
 
   @override
   String get lblNoReceipts => "Keine Belege vorzeigbar!";
+  @override
+  String get addAddress => "Adresse hinzufügen";
+
+  @override
+  String get lbladdressLine1 => "Adresszeile 1";
+
+  @override
+  String get lbladdressLine2 => "Adresszeile 2";
+
+  @override
+  String get lblcountry => "Land";
+
+  @override
+  String get lblstate => "Bundesland";
+
+  @override
+  String get lblpincode => "Postleitzahl";
+
+  @override
+  String get lblcompanyName => "Firmenname";
 }
