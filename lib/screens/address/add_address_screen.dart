@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobile_app/main.dart';
+import 'package:mobile_app/models/address_model.dart';
+import 'package:mobile_app/network/rest_apis/address.dart';
 import 'package:mobile_app/utils/common.dart';
 import 'package:mobile_app/utils/configs.dart';
 import 'package:mobile_app/widgets/loader_widget.dart';
@@ -23,6 +25,22 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
 
   void _handleSubmit() async {
     if (!formKey.currentState!.validate()) return;
+
+    Map request = {
+      'addressLine1': _addressLine1Controller.text.validate(),
+      'addressLine2': _addressLine2Controller.text.validate(),
+      'state': _stateController.text.validate(),
+      'country': _countryController.text.validate(),
+      'pincode': _pincodeController.text.validate(),
+      'companyName': _companyNameController.text.validate(),
+    };
+
+    appStore.setLoading(true);
+    AddressModel? data = await addAddress(request);
+    appStore.setLoading(false);
+    if (data != null) {
+      finish(context);
+    }
   }
 
   Widget _buildFormWidget(BuildContext context) {

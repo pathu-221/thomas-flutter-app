@@ -1,4 +1,4 @@
-class Address {
+class AddressModel {
   String? id;
   String? addressLine1;
   String? addressLine2;
@@ -11,7 +11,7 @@ class Address {
   DateTime? createdAt;
   DateTime? updatedAt;
 
-  Address({
+  AddressModel({
     this.id,
     this.addressLine1,
     this.addressLine2,
@@ -25,8 +25,8 @@ class Address {
     this.updatedAt,
   });
 
-  factory Address.fromJson(Map<String, dynamic> json) {
-    return Address(
+  factory AddressModel.fromJson(Map<String, dynamic> json) {
+    return AddressModel(
       id: json['id'],
       addressLine1: json['addressLine1'],
       addressLine2: json['addressLine2'],
@@ -41,21 +41,5 @@ class Address {
       updatedAt:
           json['updatedAt'] != null ? DateTime.parse(json['updatedAt']) : null,
     );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'addressLine1': addressLine1,
-      'addressLine2': addressLine2,
-      'state': state,
-      'country': country,
-      'pincode': pincode,
-      'companyName': companyName,
-      'userId': userId,
-      'logo': logo,
-      'createdAt': createdAt?.toIso8601String(),
-      'updatedAt': updatedAt?.toIso8601String(),
-    };
   }
 }
