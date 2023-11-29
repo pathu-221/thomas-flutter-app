@@ -103,9 +103,13 @@ abstract class BaseLanguage {
 
   String get emptyValueError;
 
-  String get missingSignature;
+  String get missing;
 
-  String get missingSignatureSubtitle;
+  String get signature;
+
+  String get missingSubtitle;
+
+  String get address;
 
   String get addAddress;
 

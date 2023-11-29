@@ -11,11 +11,14 @@ class LanguageDe extends BaseLanguage {
   String get emailLabel => "E-Mail";
 
   @override
-  String get missingSignature => "Fehlende Signatur";
+  String get signature => "Signatur";
 
   @override
-  String get missingSignatureSubtitle =>
-      "Bitte fügen Sie Ihre Signatur aus dem Profil hinzu";
+  String get missingSubtitle =>
+      "Bitte fügen Sie Folgendes aus dem Profil hinzu";
+
+  @override
+  String get missing => "Fehlen";
 
   @override
   String get passwordLabel => "Passwort";
@@ -176,6 +179,9 @@ class LanguageDe extends BaseLanguage {
 
   @override
   String get lblcountry => "Land";
+
+  @override
+  String get address => "Adresse";
 
   @override
   String get lblstate => "Bundesland";

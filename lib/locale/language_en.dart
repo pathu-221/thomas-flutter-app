@@ -107,11 +107,13 @@ class LanguageEn extends BaseLanguage {
   String get sendOverMail => "Send over mail";
 
   @override
-  String get missingSignature => "Missing signature";
+  String get signature => "Signature";
 
   @override
-  String get missingSignatureSubtitle =>
-      "Please add your signature from the profile";
+  String get missingSubtitle => "Please add the following from the profile";
+
+  @override
+  String get missing => "Missing";
 
   @override
   String get emptyValueError => "Value cannot be empty!";
@@ -186,4 +188,7 @@ class LanguageEn extends BaseLanguage {
 
   @override
   String get lblcompanyName => "Company name";
+
+  @override
+  String get address => "Address";
 }
