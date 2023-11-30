@@ -245,7 +245,7 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                   width: 100,
                 ),
               ),
-            ] else if (logoUrl != null) ...[
+            ] else if (logoUrl != null && logoUrl!.isNotEmpty) ...[
               8.width,
               InkWell(
                 onTap: () {},
