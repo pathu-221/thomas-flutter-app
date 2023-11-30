@@ -8,7 +8,7 @@ import 'package:mobile_app/utils/configs.dart';
 import 'package:mobile_app/utils/constants.dart';
 import 'package:nb_utils/nb_utils.dart';
 
-Future<HttpResponseModel?> uploadEntertainmenReceipt(
+Future<HttpResponseModel?> sendMultipartRequest(
     File file, String endpoint, Map<dynamic, dynamic> requestFields) async {
   final Uri uri = Uri.parse('$BASE_URL$endpoint');
   final token = getStringAsync(AUTH_TOKEN);

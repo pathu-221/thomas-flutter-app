@@ -1,8 +1,13 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:mobile_app/main.dart';
 import 'package:mobile_app/models/address_model.dart';
+import 'package:mobile_app/models/http_response_model.dart';
 import 'package:mobile_app/network/rest_apis/address.dart';
+import 'package:mobile_app/network/rest_apis/upload_receipt.dart';
 import 'package:mobile_app/utils/common.dart';
 import 'package:mobile_app/utils/configs.dart';
 import 'package:mobile_app/widgets/loader_widget.dart';
@@ -22,6 +27,44 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
   final TextEditingController _countryController = TextEditingController();
   final TextEditingController _pincodeController = TextEditingController();
   final TextEditingController _companyNameController = TextEditingController();
+  String? logoUrl;
+  File? selectedImage;
+
+  @override
+  void initState() {
+    super.initState();
+    _init();
+  }
+
+  void _init() async {
+    AddressModel? address = await fetchAddress();
+    if (address == null) return;
+
+    _addressLine1Controller.text = address.addressLine1!;
+    _addressLine2Controller.text = address.addressLine2 ?? "";
+    _companyNameController.text = address.companyName!;
+    _countryController.text = address.country!;
+    _pincodeController.text = address.pincode!;
+    _stateController.text = address.state!;
+    logoUrl = address.logo;
+    setState(() {});
+  }
+
+  void _pickFromCamera() async {
+    final image = await ImagePicker().pickImage(source: ImageSource.camera);
+    if (image != null) {
+      selectedImage = File(image.path);
+      setState(() {});
+    }
+  }
+
+  void _pickFromGallery() async {
+    final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (image != null) {
+      selectedImage = File(image.path);
+      setState(() {});
+    }
+  }
 
   void _handleSubmit() async {
     if (!formKey.currentState!.validate()) return;
@@ -36,11 +79,63 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
     };
 
     appStore.setLoading(true);
-    AddressModel? data = await addAddress(request);
-    appStore.setLoading(false);
-    if (data != null) {
-      finish(context);
+
+    if (selectedImage == null) {
+      AddressModel? data = await addAddress(request);
+      appStore.setLoading(false);
+      if (data != null) {
+        finish(context);
+      }
+    } else {
+      HttpResponseModel? response =
+          await sendMultipartRequest(selectedImage!, '/address', request);
+      if (response != null) {
+        if (response.status == 1) {
+          toast(response.msg);
+          finish(context);
+        } else {
+          toast(response.msg);
+        }
+      }
+      appStore.setLoading(false);
     }
+  }
+
+  void _showBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: context.cardColor,
+      builder: (context) {
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            SettingItemWidget(
+              title: language.camera,
+              leading: const Icon(
+                Icons.camera,
+                color: primaryColor,
+              ),
+              onTap: () {
+                _pickFromCamera();
+                finish(context);
+              },
+            ),
+            SettingItemWidget(
+              title: language.gallery,
+              leading: const Icon(
+                Icons.image,
+                color: primaryColor,
+              ),
+              onTap: () {
+                _pickFromGallery();
+                finish(context);
+              },
+            ),
+          ],
+        ).paddingAll(16);
+      },
+    );
   }
 
   Widget _buildFormWidget(BuildContext context) {
@@ -112,6 +207,55 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                 ),
               ),
             ),
+          ],
+        ),
+        8.height,
+        Row(
+          children: [
+            Expanded(
+              child: AppButton(
+                onTap: () {
+                  _showBottomSheet(context);
+                },
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Icon(
+                      Icons.add,
+                      color: primaryColor,
+                    ),
+                    4.width,
+                    Text(
+                      selectedImage == null
+                          ? language.uploadImage
+                          : language.changeImage,
+                      style: boldTextStyle(color: primaryColor),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            if (selectedImage != null) ...[
+              8.width,
+              InkWell(
+                onTap: () {},
+                child: Image.file(
+                  selectedImage!,
+                  height: 100,
+                  width: 100,
+                ),
+              ),
+            ] else if (logoUrl != null) ...[
+              8.width,
+              InkWell(
+                onTap: () {},
+                child: Image.network(
+                  '$BASE_URL/$logoUrl',
+                  height: 100,
+                  width: 100,
+                ),
+              ),
+            ]
           ],
         ),
       ],
