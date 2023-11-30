@@ -49,6 +49,15 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
       children: [
         AppTextField(
           textFieldType: TextFieldType.NAME,
+          controller: _companyNameController,
+          decoration: inputDecoration(
+            context,
+            labelText: language.lblcompanyName,
+          ),
+        ),
+        8.height,
+        AppTextField(
+          textFieldType: TextFieldType.NAME,
           controller: _addressLine1Controller,
           decoration: inputDecoration(
             context,
@@ -73,10 +82,10 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
         8.height,
         AppTextField(
           textFieldType: TextFieldType.NAME,
-          controller: _countryController,
+          controller: _stateController,
           decoration: inputDecoration(
             context,
-            labelText: language.lblcountry,
+            labelText: language.lblstate,
           ),
         ),
         8.height,
@@ -85,10 +94,10 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
             Expanded(
               child: AppTextField(
                 textFieldType: TextFieldType.NAME,
-                controller: _stateController,
+                controller: _countryController,
                 decoration: inputDecoration(
                   context,
-                  labelText: language.lblstate,
+                  labelText: language.lblcountry,
                 ),
               ),
             ),
@@ -104,15 +113,6 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
               ),
             ),
           ],
-        ),
-        8.height,
-        AppTextField(
-          textFieldType: TextFieldType.NAME,
-          controller: _companyNameController,
-          decoration: inputDecoration(
-            context,
-            labelText: language.lblcompanyName,
-          ),
         ),
       ],
     );

@@ -116,6 +116,12 @@ class LanguageEn extends BaseLanguage {
   String get missing => "Missing";
 
   @override
+  String get emailRecipients => "Email recipients";
+
+  @override
+  String get addRecipient => "Add recipient";
+
+  @override
   String get emptyValueError => "Value cannot be empty!";
 
   @override

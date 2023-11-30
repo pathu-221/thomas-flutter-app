@@ -21,7 +21,13 @@ class LanguageDe extends BaseLanguage {
   String get missing => "Fehlen";
 
   @override
+  String get emailRecipients => "E-Mail-Empfänger";
+
+  @override
   String get passwordLabel => "Passwort";
+
+  @override
+  String get addRecipient => "Empfänger hinzufügen";
 
   @override
   String get sendOverMail => "Per Post verschicken";

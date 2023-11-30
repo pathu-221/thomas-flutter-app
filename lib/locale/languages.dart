@@ -124,4 +124,8 @@ abstract class BaseLanguage {
   String get lblpincode;
 
   String get lblcompanyName;
+
+  String get emailRecipients;
+
+  String get addRecipient;
 }

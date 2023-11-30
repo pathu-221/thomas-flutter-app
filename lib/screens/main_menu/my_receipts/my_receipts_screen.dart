@@ -108,7 +108,6 @@ class _MyReceiptsScreenState extends State<MyReceiptsScreen> {
   }
 
   Widget _buildStickyAlertWidget(BuildContext context) {
-    log('address ${config?.addressExist}, signature ${config?.signatureExist}');
     return Container(
       width: context.width(),
       decoration: BoxDecoration(
@@ -119,7 +118,7 @@ class _MyReceiptsScreenState extends State<MyReceiptsScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "${language.missing} ${!config!.addressExist! ? language.address : ""} ${!config!.signatureExist! ? ",{language.signature}" : ""}",
+            "${language.missing} ${!config!.addressExist! ? language.address : ""} ${!config!.signatureExist! ? ",${language.signature}" : ""}",
             style: boldTextStyle(color: dangerColor),
           ),
           // 8.height,

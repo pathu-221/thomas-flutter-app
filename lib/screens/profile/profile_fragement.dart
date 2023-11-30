@@ -3,6 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobile_app/main.dart';
 import 'package:mobile_app/network/rest_apis/auth.dart';
 import 'package:mobile_app/screens/address/add_address_screen.dart';
+import 'package:mobile_app/screens/email_recipient/email_recipient_screen.dart';
 import 'package:mobile_app/screens/main_menu/save_signature/save_signature_screen.dart';
 import 'package:mobile_app/screens/sign_in_and_sign_up/sign_in_screen.dart';
 import 'package:mobile_app/utils/configs.dart';
@@ -90,6 +91,13 @@ class _ProfileFragementState extends State<ProfileFragement>
                     title: language.addAddress,
                     onTap: () {
                       AddAddressScreen().launch(context);
+                    },
+                  ),
+                  SettingItemWidget(
+                    leading: const Icon(Icons.email),
+                    title: language.emailRecipients,
+                    onTap: () {
+                      const EmailRecipientScreen().launch(context);
                     },
                   ),
                   SettingSection(
