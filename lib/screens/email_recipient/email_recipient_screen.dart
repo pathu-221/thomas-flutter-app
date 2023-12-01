@@ -107,7 +107,7 @@ class _EmailRecipientScreenState extends State<EmailRecipientScreen> {
           ),
           16.height,
           Text(
-            language.lblNoReceipts.validate(),
+            language.lblNoRecipients.validate(),
             style: secondaryTextStyle(size: 18),
           )
         ],

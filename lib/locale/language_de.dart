@@ -30,6 +30,9 @@ class LanguageDe extends BaseLanguage {
   String get addRecipient => "Empfänger hinzufügen";
 
   @override
+  String get lblNoRecipients => "Keine Empfänger zum Anzeigen vorhanden";
+
+  @override
   String get sendOverMail => "Per Post verschicken";
 
   @override

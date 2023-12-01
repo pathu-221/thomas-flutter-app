@@ -122,6 +122,9 @@ class LanguageEn extends BaseLanguage {
   String get addRecipient => "Add recipient";
 
   @override
+  String get lblNoRecipients => "No recipients to show";
+
+  @override
   String get emptyValueError => "Value cannot be empty!";
 
   @override

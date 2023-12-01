@@ -27,6 +27,7 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
   final TextEditingController _countryController = TextEditingController();
   final TextEditingController _pincodeController = TextEditingController();
   final TextEditingController _companyNameController = TextEditingController();
+  bool updateImage = false;
   String? logoUrl;
   File? selectedImage;
 
@@ -54,7 +55,9 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
     final image = await ImagePicker().pickImage(source: ImageSource.camera);
     if (image != null) {
       selectedImage = File(image.path);
-      setState(() {});
+      setState(() {
+        updateImage = true;
+      });
     }
   }
 
@@ -62,7 +65,9 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
     final image = await ImagePicker().pickImage(source: ImageSource.gallery);
     if (image != null) {
       selectedImage = File(image.path);
-      setState(() {});
+      setState(() {
+        updateImage = true;
+      });
     }
   }
 
@@ -76,6 +81,7 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
       'country': _countryController.text.validate(),
       'pincode': _pincodeController.text.validate(),
       'companyName': _companyNameController.text.validate(),
+      'updateAddress': updateImage.toString(),
     };
 
     appStore.setLoading(true);
@@ -135,6 +141,52 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
           ],
         ).paddingAll(16);
       },
+    );
+  }
+
+  Widget _imageWidget() {
+    return Stack(
+      alignment: Alignment.topRight,
+      children: [
+        Container(
+          padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+          child: selectedImage != null
+              ? Image.file(
+                  selectedImage!,
+                  height: 100,
+                  width: 100,
+                  fit: BoxFit.cover,
+                )
+              : Image.network(
+                  '$BASE_URL/$logoUrl',
+                  height: 100,
+                  width: 100,
+                  fit: BoxFit.cover,
+                ),
+        ),
+        Positioned(
+          child: Container(
+            padding: const EdgeInsets.all(4),
+            decoration: const BoxDecoration(
+                shape: BoxShape.circle, color: primaryColor),
+            child: GestureDetector(
+              child: const Icon(
+                Icons.close,
+                color: Colors.white,
+              ),
+              onTap: () {
+                setState(() {
+                  selectedImage = null;
+                  if (logoUrl != null && logoUrl!.isNotEmpty) {
+                    logoUrl = null;
+                  }
+                  updateImage = true; // Remove the selected image
+                });
+              },
+            ),
+          ),
+        )
+      ],
     );
   }
 
@@ -237,24 +289,10 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
             ),
             if (selectedImage != null) ...[
               8.width,
-              InkWell(
-                onTap: () {},
-                child: Image.file(
-                  selectedImage!,
-                  height: 100,
-                  width: 100,
-                ),
-              ),
+              _imageWidget(),
             ] else if (logoUrl != null && logoUrl!.isNotEmpty) ...[
               8.width,
-              InkWell(
-                onTap: () {},
-                child: Image.network(
-                  '$BASE_URL/$logoUrl',
-                  height: 100,
-                  width: 100,
-                ),
-              ),
+              _imageWidget(),
             ]
           ],
         ),
