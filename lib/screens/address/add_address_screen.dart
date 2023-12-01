@@ -279,8 +279,8 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                     4.width,
                     Text(
                       selectedImage == null
-                          ? language.uploadImage
-                          : language.changeImage,
+                          ? language.uploadLogo
+                          : language.changeLogo,
                       style: boldTextStyle(color: primaryColor),
                     ),
                   ],
@@ -307,7 +307,7 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
         iconTheme: const IconThemeData(color: Colors.white),
         backgroundColor: primaryColor,
         title: Text(
-          language.addAddress,
+          language.addAddressAndLogo,
           style: boldTextStyle(color: Colors.white),
         ),
       ),

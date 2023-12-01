@@ -27,6 +27,15 @@ class LanguageDe extends BaseLanguage {
   String get passwordLabel => "Passwort";
 
   @override
+  String get addAddressAndLogo => "Fügen Sie Adresse und Logo hinzu";
+
+  @override
+  String get changeLogo => "Logo ändern";
+
+  @override
+  String get uploadLogo => "Logo hochladen";
+
+  @override
   String get addRecipient => "Empfänger hinzufügen";
 
   @override

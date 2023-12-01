@@ -88,7 +88,7 @@ class _ProfileFragementState extends State<ProfileFragement>
                   ),
                   SettingItemWidget(
                     leading: const Icon(Icons.home_rounded),
-                    title: language.addAddress,
+                    title: language.addAddressAndLogo,
                     onTap: () {
                       AddAddressScreen().launch(context);
                     },

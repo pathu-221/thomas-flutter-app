@@ -113,6 +113,12 @@ abstract class BaseLanguage {
 
   String get address;
 
+  String get addAddressAndLogo;
+
+  String get changeLogo;
+
+  String get uploadLogo;
+
   String get addAddress;
 
   String get lbladdressLine1;

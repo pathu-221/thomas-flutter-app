@@ -131,6 +131,15 @@ class LanguageEn extends BaseLanguage {
   String get recipient => "Recipient";
 
   @override
+  String get addAddressAndLogo => "Add address and logo";
+
+  @override
+  String get changeLogo => "Change logo";
+
+  @override
+  String get uploadLogo => "Upload logo";
+
+  @override
   String get entertainmentPurpose => "Entertainment purpose";
 
   @override
