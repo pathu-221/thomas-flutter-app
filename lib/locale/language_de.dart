@@ -36,6 +36,9 @@ class LanguageDe extends BaseLanguage {
   String get uploadLogo => "Logo hochladen";
 
   @override
+  String get image => "Bild";
+
+  @override
   String get addRecipient => "Empfänger hinzufügen";
 
   @override

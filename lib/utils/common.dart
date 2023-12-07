@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:mobile_app/utils/configs.dart';
 import 'package:nb_utils/nb_utils.dart';
 
@@ -39,4 +40,14 @@ InputDecoration inputDecoration(BuildContext context,
     filled: true,
     fillColor: context.cardColor,
   );
+}
+
+Future<XFile?> pickImageFromGallery() async {
+  final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+  return image;
+}
+
+Future<XFile?> pickImageFromCamera() async {
+  final image = await ImagePicker().pickImage(source: ImageSource.camera);
+  return image;
 }

@@ -51,26 +51,6 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
     setState(() {});
   }
 
-  void _pickFromCamera() async {
-    final image = await ImagePicker().pickImage(source: ImageSource.camera);
-    if (image != null) {
-      selectedImage = File(image.path);
-      setState(() {
-        updateImage = true;
-      });
-    }
-  }
-
-  void _pickFromGallery() async {
-    final image = await ImagePicker().pickImage(source: ImageSource.gallery);
-    if (image != null) {
-      selectedImage = File(image.path);
-      setState(() {
-        updateImage = true;
-      });
-    }
-  }
-
   void _handleSubmit() async {
     if (!formKey.currentState!.validate()) return;
 
@@ -122,9 +102,20 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                 Icons.camera,
                 color: primaryColor,
               ),
-              onTap: () {
-                _pickFromCamera();
-                finish(context);
+              onTap: () async {
+                await pickImageFromCamera().then(
+                  (value) {
+                    if (value != null) {
+                      selectedImage = File(value.path);
+                      setState(() {
+                        updateImage = true;
+                      });
+                    }
+                    finish(context);
+                  },
+                ).catchError((error) {
+                  //
+                });
               },
             ),
             SettingItemWidget(
@@ -133,9 +124,20 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                 Icons.image,
                 color: primaryColor,
               ),
-              onTap: () {
-                _pickFromGallery();
-                finish(context);
+              onTap: () async {
+                await pickImageFromGallery().then(
+                  (value) {
+                    if (value != null) {
+                      selectedImage = File(value.path);
+                      setState(() {
+                        updateImage = true;
+                      });
+                    }
+                    finish(context);
+                  },
+                ).catchError((error) {
+                  //
+                });
               },
             ),
           ],

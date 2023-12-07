@@ -119,6 +119,8 @@ abstract class BaseLanguage {
 
   String get uploadLogo;
 
+  String get image;
+
   String get addAddress;
 
   String get lbladdressLine1;

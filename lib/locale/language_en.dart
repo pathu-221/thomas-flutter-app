@@ -137,6 +137,9 @@ class LanguageEn extends BaseLanguage {
   String get changeLogo => "Change logo";
 
   @override
+  String get image => "Image";
+
+  @override
   String get uploadLogo => "Upload logo";
 
   @override
