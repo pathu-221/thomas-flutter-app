@@ -80,7 +80,7 @@ class _ProfileFragementState extends State<ProfileFragement>
                 divider: const Offstage(),
                 items: [
                   SettingItemWidget(
-                    leading: const Icon(Icons.edit_outlined),
+                    leading: const Icon(Icons.edit),
                     title: language.saveSignatureTitle,
                     onTap: () {
                       const SaveSignatureScreen().launch(context);
@@ -88,7 +88,7 @@ class _ProfileFragementState extends State<ProfileFragement>
                   ),
                   SettingItemWidget(
                     leading: const Icon(Icons.home_rounded),
-                    title: language.addAddressAndLogo,
+                    title: language.addressAndLogo,
                     onTap: () {
                       AddAddressScreen().launch(context);
                     },

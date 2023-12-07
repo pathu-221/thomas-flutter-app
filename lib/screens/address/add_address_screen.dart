@@ -307,7 +307,7 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
         iconTheme: const IconThemeData(color: Colors.white),
         backgroundColor: primaryColor,
         title: Text(
-          language.addAddressAndLogo,
+          language.addressAndLogo,
           style: boldTextStyle(color: Colors.white),
         ),
       ),
