@@ -107,17 +107,37 @@ class LanguageEn extends BaseLanguage {
   String get sendOverMail => "Send over mail";
 
   @override
-  String get missingSignature => "Missing signature";
+  String get signature => "Signature";
 
   @override
-  String get missingSignatureSubtitle =>
-      "Please add your signature from the profile";
+  String get missingSubtitle => "Please add the following from the profile";
+
+  @override
+  String get missing => "Missing";
+
+  @override
+  String get emailRecipients => "Email recipients";
+
+  @override
+  String get addRecipient => "Add recipient";
+
+  @override
+  String get lblNoRecipients => "No recipients to show";
 
   @override
   String get emptyValueError => "Value cannot be empty!";
 
   @override
   String get recipient => "Recipient";
+
+  @override
+  String get addAddressAndLogo => "Add address and logo";
+
+  @override
+  String get changeLogo => "Change logo";
+
+  @override
+  String get uploadLogo => "Upload logo";
 
   @override
   String get entertainmentPurpose => "Entertainment purpose";
@@ -165,4 +185,28 @@ class LanguageEn extends BaseLanguage {
 
   @override
   String get lblNoReceipts => "No receipts to show!";
+
+  @override
+  String get addAddress => "Add address";
+
+  @override
+  String get lbladdressLine1 => "Address line 1";
+
+  @override
+  String get lbladdressLine2 => "Address line 2";
+
+  @override
+  String get lblcountry => "Country";
+
+  @override
+  String get lblstate => "State";
+
+  @override
+  String get lblpincode => "Pincode";
+
+  @override
+  String get lblcompanyName => "Company name";
+
+  @override
+  String get address => "Address";
 }

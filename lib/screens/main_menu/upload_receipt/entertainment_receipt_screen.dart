@@ -73,7 +73,7 @@ class _EntertainmentReceiptScreenState
 
     appStore.setLoading(true);
 
-    HttpResponseModel? response = await uploadEntertainmenReceipt(
+    HttpResponseModel? response = await sendMultipartRequest(
             selectedImage!, '/entertainment-receipt', request)
         .catchError((error) {
       toast('Something went wrong!');

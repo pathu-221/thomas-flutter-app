@@ -99,11 +99,41 @@ abstract class BaseLanguage {
 
   String get lblNoReceipts;
 
+  String get lblNoRecipients;
+
   String get sendOverMail;
 
   String get emptyValueError;
 
-  String get missingSignature;
+  String get missing;
 
-  String get missingSignatureSubtitle;
+  String get signature;
+
+  String get missingSubtitle;
+
+  String get address;
+
+  String get addAddressAndLogo;
+
+  String get changeLogo;
+
+  String get uploadLogo;
+
+  String get addAddress;
+
+  String get lbladdressLine1;
+
+  String get lbladdressLine2;
+
+  String get lblcountry;
+
+  String get lblstate;
+
+  String get lblpincode;
+
+  String get lblcompanyName;
+
+  String get emailRecipients;
+
+  String get addRecipient;
 }

@@ -24,6 +24,7 @@ class MyReceiptsScreen extends StatefulWidget {
 
 class _MyReceiptsScreenState extends State<MyReceiptsScreen> {
   ValueNotifier<bool> isDialOpen = ValueNotifier(false);
+  ConfigModel? config;
   bool? isSignaturExist;
 
   @override
@@ -40,7 +41,7 @@ class _MyReceiptsScreenState extends State<MyReceiptsScreen> {
     ConfigModel? data = await getConfig();
     if (data != null) {
       setState(() {
-        isSignaturExist = data.signatureExist;
+        config = data;
       });
     }
   }
@@ -117,12 +118,12 @@ class _MyReceiptsScreenState extends State<MyReceiptsScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            language.missingSignature,
+            "${language.missing} ${!config!.addressExist! ? language.address : ""} ${!config!.signatureExist! ? ",${language.signature}" : ""}",
             style: boldTextStyle(color: dangerColor),
           ),
           // 8.height,
           Text(
-            language.missingSignatureSubtitle,
+            language.missingSubtitle,
             style: secondaryTextStyle(color: dangerColor),
           )
         ],
@@ -143,7 +144,8 @@ class _MyReceiptsScreenState extends State<MyReceiptsScreen> {
       ),
       body: Column(
         children: [
-          if (isSignaturExist != null && isSignaturExist == false)
+          if (config != null &&
+              (!config!.addressExist! || !config!.signatureExist!))
             _buildStickyAlertWidget(context),
           Expanded(
             child: FutureBuilder<List<ReceiptModel>?>(

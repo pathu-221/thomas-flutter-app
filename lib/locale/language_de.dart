@@ -11,14 +11,35 @@ class LanguageDe extends BaseLanguage {
   String get emailLabel => "E-Mail";
 
   @override
-  String get missingSignature => "Fehlende Signatur";
+  String get signature => "Signatur";
 
   @override
-  String get missingSignatureSubtitle =>
-      "Bitte fügen Sie Ihre Signatur aus dem Profil hinzu";
+  String get missingSubtitle =>
+      "Bitte fügen Sie Folgendes aus dem Profil hinzu";
+
+  @override
+  String get missing => "Fehlen";
+
+  @override
+  String get emailRecipients => "E-Mail-Empfänger";
 
   @override
   String get passwordLabel => "Passwort";
+
+  @override
+  String get addAddressAndLogo => "Fügen Sie Adresse und Logo hinzu";
+
+  @override
+  String get changeLogo => "Logo ändern";
+
+  @override
+  String get uploadLogo => "Logo hochladen";
+
+  @override
+  String get addRecipient => "Empfänger hinzufügen";
+
+  @override
+  String get lblNoRecipients => "Keine Empfänger zum Anzeigen vorhanden";
 
   @override
   String get sendOverMail => "Per Post verschicken";
@@ -165,4 +186,27 @@ class LanguageDe extends BaseLanguage {
 
   @override
   String get lblNoReceipts => "Keine Belege vorzeigbar!";
+  @override
+  String get addAddress => "Adresse hinzufügen";
+
+  @override
+  String get lbladdressLine1 => "Adresszeile 1";
+
+  @override
+  String get lbladdressLine2 => "Adresszeile 2";
+
+  @override
+  String get lblcountry => "Land";
+
+  @override
+  String get address => "Adresse";
+
+  @override
+  String get lblstate => "Bundesland";
+
+  @override
+  String get lblpincode => "Postleitzahl";
+
+  @override
+  String get lblcompanyName => "Firmenname";
 }
