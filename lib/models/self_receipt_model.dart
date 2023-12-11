@@ -4,6 +4,7 @@ class SelfReceiptModel {
   double amount;
   String recipient;
   String reason;
+  String? image;
   String purpose;
   DateTime createdAt;
   DateTime updatedAt;
@@ -18,11 +19,11 @@ class SelfReceiptModel {
     required this.purpose,
     required this.createdAt,
     required this.updatedAt,
+    this.image,
     this.deletedAt,
   });
 
   factory SelfReceiptModel.fromJson(Map<String, dynamic> json) {
-
     return SelfReceiptModel(
       id: json['id'],
       receiptNumber: json['receiptNumber'],
@@ -30,6 +31,7 @@ class SelfReceiptModel {
       recipient: json['recipient'],
       reason: json['reason'],
       purpose: json['purpose'],
+      image: json['image'],
       createdAt: DateTime.parse(json['createdAt']),
       updatedAt: DateTime.parse(json['updatedAt']),
     );

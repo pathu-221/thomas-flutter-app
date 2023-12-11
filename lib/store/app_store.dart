@@ -12,6 +12,9 @@ abstract class _AppStore with Store {
   String userLastName = '';
 
   @observable
+  String userEmail = '';
+
+  @observable
   bool isLoggedIn = false;
 
   @observable
@@ -20,6 +23,11 @@ abstract class _AppStore with Store {
   @action
   void setUserFirstName(String val) {
     userFirstName = val;
+  }
+
+  @action
+  void setUserEmail(String val) {
+    userEmail = val;
   }
 
   @action

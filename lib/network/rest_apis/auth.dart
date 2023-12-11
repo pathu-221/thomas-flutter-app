@@ -52,6 +52,7 @@ Future logout() async {
   appStore.setIsLoggedIn(false);
   appStore.setUserFirstName('');
   appStore.setUserLastName('');
+  appStore.setUserEmail('');
   setValue(AUTH_TOKEN, '');
 }
 
