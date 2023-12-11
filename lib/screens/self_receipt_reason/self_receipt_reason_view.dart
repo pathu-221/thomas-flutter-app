@@ -49,6 +49,46 @@ class SelfReceiptReasonView extends StatelessWidget {
     );
   }
 
+  Widget _imageWidget(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          language.image,
+          style: boldTextStyle(),
+        ),
+        8.height,
+        InkWell(
+          onTap: () {
+            _buildImagePreview(context).launch(context);
+          },
+          child: Image.network(
+            '$BASE_URL/${receipt.image}',
+            width: 100,
+            fit: BoxFit.contain,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildImagePreview(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        iconTheme: const IconThemeData(color: Colors.white),
+        backgroundColor: Colors.black,
+      ),
+      backgroundColor: Colors.black,
+      body: Center(
+        child: Image.network(
+          '$BASE_URL/${receipt.image}',
+          fit: BoxFit.contain,
+        ),
+      ),
+    );
+  }
+
   Widget _receiptWidget(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
@@ -144,6 +184,10 @@ class SelfReceiptReasonView extends StatelessWidget {
                   _receiptWidget(context),
                   16.height,
                   _reasonWidget(context),
+                  if (receipt.image != null && receipt.image!.isNotEmpty)
+                    16.height,
+                  if (receipt.image != null && receipt.image!.isNotEmpty)
+                    _imageWidget(context),
                 ],
               ),
             ),

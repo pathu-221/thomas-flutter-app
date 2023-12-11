@@ -28,6 +28,7 @@ void main() async {
       appStore.setIsLoggedIn(true);
       appStore.setUserFirstName(userData.firstName!);
       appStore.setUserLastName(userData.lastName!);
+      appStore.setUserEmail(userData.email!);
     }
   }
 

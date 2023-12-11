@@ -39,6 +39,7 @@ class _SignInScreenState extends State<SignInScreen> {
       appStore.setUserFirstName(userData.firstName!);
       appStore.setIsLoggedIn(true);
       appStore.setUserLastName(userData.lastName!);
+      appStore.setUserEmail(userData.email!);
       MainMenuScreen().launch(context, isNewTask: true);
     }
   }

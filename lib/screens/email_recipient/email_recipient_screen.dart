@@ -6,6 +6,7 @@ import 'package:mobile_app/models/http_response_model.dart';
 import 'package:mobile_app/network/rest_apis/email_recipient.dart';
 import 'package:mobile_app/utils/common.dart';
 import 'package:mobile_app/utils/configs.dart';
+import 'package:mobile_app/utils/constants.dart';
 import 'package:mobile_app/widgets/loader_widget.dart';
 import 'package:nb_utils/nb_utils.dart';
 
@@ -58,38 +59,52 @@ class _EmailRecipientScreenState extends State<EmailRecipientScreen> {
     _recipientEmailController.text = '';
     showInDialog(
       context,
-      title: Text(
-        language.addRecipient,
-        style: boldTextStyle(),
-      ),
+      contentPadding: const EdgeInsets.all(0),
       builder: (context) => Column(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            language.emailLabel,
-            style: boldTextStyle(),
-          ),
-          16.height,
-          Form(
-            key: formKey,
-            child: AppTextField(
-              textFieldType: TextFieldType.EMAIL,
-              controller: _recipientEmailController,
-              decoration: inputDecoration(
-                context,
-                labelText: language.emailLabel,
+          Container(
+            padding: const EdgeInsets.all(16),
+            width: context.width(),
+            decoration: BoxDecoration(
+              color: primaryColor,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(defaultRadius),
+                topRight: Radius.circular(defaultRadius),
               ),
             ),
+            child: Text(
+              language.addRecipient,
+              style: boldTextStyle(size: 18, color: white),
+            ),
           ),
-          8.height,
-          AppButton(
-            width: context.width(),
-            onTap: _handleSubmit,
-            text: language.submit,
-            textColor: Colors.white,
-            color: primaryColor,
+          Container(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              children: [
+                Form(
+                  key: formKey,
+                  child: AppTextField(
+                    textFieldType: TextFieldType.EMAIL,
+                    controller: _recipientEmailController,
+                    decoration: inputDecoration(
+                      context,
+                      labelText: language.emailLabel,
+                    ),
+                  ),
+                ),
+                8.height,
+                AppButton(
+                  width: context.width(),
+                  onTap: _handleSubmit,
+                  text: language.submit,
+                  textColor: Colors.white,
+                  color: primaryColor,
+                )
+              ],
+            ),
           ),
         ],
       ),
@@ -126,7 +141,7 @@ class _EmailRecipientScreenState extends State<EmailRecipientScreen> {
       itemBuilder: (context, index) {
         EmailRecipientModel recipient = recipients[index];
         return Container(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -182,30 +197,55 @@ class _EmailRecipientScreenState extends State<EmailRecipientScreen> {
       body: Stack(
         fit: StackFit.expand,
         children: [
-          FutureBuilder<List<EmailRecipientModel>?>(
-            future: loadEmailRecipients(),
-            builder: ((context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(
-                  child: CircularProgressIndicator(
-                    color: primaryColor,
-                  ),
-                );
-              } else if (snapshot.hasData &&
-                  snapshot.data != null &&
-                  snapshot.data!.isNotEmpty) {
-                return _buildEmailRecipients(context, snapshot.data!);
-              } else if (snapshot.data == null || snapshot.data!.isEmpty) {
-                return _noDataWidge();
-              } else if (snapshot.hasError) {
-                return _noDataWidge();
-              }
-              return const Center(
-                child: CircularProgressIndicator(
-                  color: primaryColor,
+          Column(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(16),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        appStore.userEmail,
+                        style: secondaryTextStyle(size: 18),
+                      ),
+                    ),
+                  ],
                 ),
-              );
-            }),
+              ),
+              Divider(
+                color: context.cardColor,
+                indent: 0,
+                height: 1,
+              ),
+              Expanded(
+                child: FutureBuilder<List<EmailRecipientModel>?>(
+                  future: loadEmailRecipients(),
+                  builder: ((context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const Center(
+                        child: CircularProgressIndicator(
+                          color: primaryColor,
+                        ),
+                      );
+                    } else if (snapshot.hasData &&
+                        snapshot.data != null &&
+                        snapshot.data!.isNotEmpty) {
+                      return _buildEmailRecipients(context, snapshot.data!);
+                    } else if (snapshot.data == null ||
+                        snapshot.data!.isEmpty) {
+                      return _noDataWidge();
+                    } else if (snapshot.hasError) {
+                      return _noDataWidge();
+                    }
+                    return const Center(
+                      child: CircularProgressIndicator(
+                        color: primaryColor,
+                      ),
+                    );
+                  }),
+                ),
+              ),
+            ],
           ),
           Observer(
             builder: (_) => const LoaderWidget().visible(appStore.isLoading),

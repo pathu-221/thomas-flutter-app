@@ -50,7 +50,6 @@ class EntertainmentReceiptView extends StatelessWidget {
           child: Image.network(
             '$BASE_URL/${receipt.image}',
             height: 100,
-            width: 100,
             fit: BoxFit.cover,
           ),
         ),

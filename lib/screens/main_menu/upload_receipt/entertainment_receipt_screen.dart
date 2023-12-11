@@ -33,22 +33,6 @@ class _EntertainmentReceiptScreenState
   File? selectedImage;
   List<String> entertainedPersons = [];
 
-  void _pickFromCamera() async {
-    final image = await ImagePicker().pickImage(source: ImageSource.camera);
-    if (image != null) {
-      selectedImage = File(image.path);
-      setState(() {});
-    }
-  }
-
-  void _pickFromGallery() async {
-    final image = await ImagePicker().pickImage(source: ImageSource.gallery);
-    if (image != null) {
-      selectedImage = File(image.path);
-      setState(() {});
-    }
-  }
-
   void _handleSubmit() async {
     if (selectedImage == null) {
       toast(language.pleaseUploadImage);
@@ -106,8 +90,16 @@ class _EntertainmentReceiptScreenState
                 Icons.camera,
                 color: primaryColor,
               ),
-              onTap: () {
-                _pickFromCamera();
+              onTap: () async {
+                await pickImageFromCamera().then((value) {
+                  if (value != null) {
+                    selectedImage = File(value.path);
+                    setState(() {});
+                  }
+                  finish(context);
+                }).catchError((error) {
+                  //
+                });
                 finish(context);
               },
             ),
@@ -117,9 +109,16 @@ class _EntertainmentReceiptScreenState
                 Icons.image,
                 color: primaryColor,
               ),
-              onTap: () {
-                _pickFromGallery();
-                finish(context);
+              onTap: () async {
+                await pickImageFromGallery().then((value) {
+                  if (value != null) {
+                    selectedImage = File(value.path);
+                    setState(() {});
+                  }
+                  finish(context);
+                }).catchError((error) {
+                  //
+                });
               },
             ),
           ],
@@ -269,29 +268,36 @@ class _EntertainmentReceiptScreenState
   }
 
   Widget uploadImage() {
-    return OutlinedButton(
-      onPressed: () {
-        _showBottomSheet(context);
-      },
-      style: ButtonStyle(
-        side: MaterialStateProperty.resolveWith((states) {
-          return const BorderSide(color: primaryColor);
-        }),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          const Icon(
-            Icons.add,
-            color: primaryColor,
+    return Row(
+      children: [
+        Expanded(
+          child: AppButton(
+            onTap: () {
+              _showBottomSheet(context);
+            },
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Icon(
+                  Icons.add,
+                  color: primaryColor,
+                ),
+                4.width,
+                Text(
+                  selectedImage == null
+                      ? language.uploadImage
+                      : language.changeImage,
+                  style: boldTextStyle(color: primaryColor),
+                ),
+              ],
+            ),
           ),
-          4.width,
-          Text(
-            selectedImage == null ? language.uploadImage : language.changeImage,
-            style: boldTextStyle(color: primaryColor),
-          ),
-        ],
-      ),
+        ),
+        if (selectedImage != null) ...[
+          8.width,
+          _imageWidget(),
+        ]
+      ],
     );
   }
 
@@ -300,8 +306,13 @@ class _EntertainmentReceiptScreenState
       alignment: Alignment.topRight,
       children: [
         Container(
-          padding: const EdgeInsets.all(12),
-          child: Image.file(selectedImage!, height: 100),
+          padding: const EdgeInsets.all(16),
+          child: Image.file(
+            selectedImage!,
+            height: 100,
+            width: 100,
+            fit: BoxFit.cover,
+          ),
         ),
         Positioned(
           child: Container(
@@ -350,10 +361,9 @@ class _EntertainmentReceiptScreenState
                   children: [
                     _titleWidget(),
                     16.height,
-                    uploadImage(),
-                    if (selectedImage != null) ...[16.height, _imageWidget()],
-                    16.height,
                     _formInputFieldWidget(),
+                    16.height,
+                    uploadImage(),
                     16.height,
                     AppButton(
                       width: context.width(),
