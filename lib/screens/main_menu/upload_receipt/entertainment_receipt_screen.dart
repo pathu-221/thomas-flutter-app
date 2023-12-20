@@ -100,7 +100,6 @@ class _EntertainmentReceiptScreenState
                 }).catchError((error) {
                   //
                 });
-                finish(context);
               },
             ),
             SettingItemWidget(
